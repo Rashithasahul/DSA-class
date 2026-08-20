@@ -285,4 +285,117 @@ and later with things like:
 vector<pair<int,int>>
 ```
 
-So for your current STL journey, **`vector<pair<int,int>>` is definitely worth practicing next.**
+So for your current STL journey, **`vector<pair<int,int>>` is definitely worth practicing next.**  
+
+
+
+IN JAVA 
+
+class Pair<A, B> {
+    A first;
+    B second;
+
+    Pair(A first, B second) {
+        this.first = first;
+        this.second = second;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+
+        Pair<Integer, Double> myPair =
+            new Pair<>(42, 3.14159);
+
+        Pair<Integer, Character> myPair1 =
+            new Pair<>(0, 'a');
+
+        Pair<Integer, String> myPair2 =
+            new Pair<>(21, "Hello World");
+
+        System.out.println(
+            "1st Pair: " + myPair.first + " " + myPair.second
+        );
+
+        System.out.println(
+            "2nd Pair: " + myPair1.first + " " + myPair1.second
+        );
+
+        System.out.println(
+            "3rd Pair: " + myPair2.first + " " + myPair2.second
+        );
+    }
+}
+
+3. Python
+
+Python makes this much easier. 😄
+
+The closest common equivalent is a tuple.
+
+myPair = (42, 3.14159)
+myPair1 = (0, 'a')
+myPair2 = (21, "Hello World")
+
+
+print("1st Pair:", myPair[0], myPair[1])
+print("2nd Pair:", myPair1[0], myPair1[1])
+print("3rd Pair:", myPair2[0], myPair2[1])
+
+Access:
+
+myPair[0]
+myPair[1]
+
+4. Nested Pair
+
+Your C++:
+
+pair<int, pair<int, int>> nestedPair = {0, {10, 20}};
+
+
+cout << nestedPair.first << endl;
+cout << nestedPair.second.first << endl;
+cout << nestedPair.second.second << endl;
+Python equivalent
+nestedPair = (0, (10, 20))
+
+
+print(nestedPair[0])
+print(nestedPair[1][0])
+print(nestedPair[1][1])
+
+Output:
+
+0
+10
+20
+Java equivalent
+
+Using our Pair class:
+
+Pair<Integer, Pair<Integer, Integer>> nestedPair =
+    new Pair<>(0, new Pair<>(10, 20));
+
+
+System.out.println(nestedPair.first);
+System.out.println(nestedPair.second.first);
+System.out.println(nestedPair.second.second);
+5. Array of Pairs
+
+Your C++:
+
+pair<int, string> pairs[] = {
+    {1, "One"},
+    {2, "Two"},
+    {3, "Three"}
+};
+
+
+cout << pairs[1].first << " ";
+cout << pairs[1].second;
+
+Output:
+
+2 Two
+
