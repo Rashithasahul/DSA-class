@@ -1,0 +1,476 @@
+Yes machi 👍 Let's make **Queue — C++ vs Java vs Python** in the same simple differentiation style.
+
+# 🔥 Queue — C++ vs Java vs Python
+
+Queue follows **FIFO — First In, First Out**.
+
+```text
+FRONT                         BACK
+  ↓                             ↓
+[10] [20] [30] [40]
+ ↑                              ↑
+remove                         add
+```
+
+The first element added is the first one removed.
+
+---
+
+## 1. Creating a Queue
+
+| Language         | Syntax                                   |
+| ---------------- | ---------------------------------------- |
+| **C++**          | `queue<int> q;`                          |
+| **Java**         | `Queue<Integer> q = new ArrayDeque<>();` |
+| **Python list**  | `q = []`                                 |
+| **Python deque** | `q = deque()`                            |
+| **Python Queue** | `q = Queue()`                            |
+
+### Recommended
+
+```text
+C++     → queue
+Java    → ArrayDeque
+Python  → collections.deque
+```
+
+For normal single-threaded queue problems, `collections.deque` is usually the convenient Python choice.
+
+---
+
+# 2. Add / Enqueue
+
+### C++
+
+```cpp
+q.push(10);
+```
+
+### Java
+
+```java
+q.offer(10);
+```
+
+or:
+
+```java
+q.add(10);
+```
+
+### Python List
+
+```python
+q.append(10)
+```
+
+### Python Deque
+
+```python
+q.append(10)
+```
+
+### Python Queue
+
+```python
+q.put(10)
+```
+
+| C++      | Java      | Python `deque` |
+| -------- | --------- | -------------- |
+| `push()` | `offer()` | `append()`     |
+
+🔥 Don't confuse:
+
+```text
+Stack:
+C++/Java → push()
+
+Queue:
+C++ → push()
+Java → offer()
+Python deque → append()
+```
+
+---
+
+# 3. Remove / Dequeue
+
+### C++
+
+```cpp
+q.pop();
+```
+
+### Java
+
+```java
+q.poll();
+```
+
+### Python List
+
+```python
+q.pop(0)
+```
+
+### Python Deque
+
+```python
+q.popleft()
+```
+
+### Python Queue
+
+```python
+q.get()
+```
+
+| C++     | Java     | Python `deque` |
+| ------- | -------- | -------------- |
+| `pop()` | `poll()` | `popleft()`    |
+
+⚠️ Very important:
+
+In C++:
+
+```cpp
+q.pop();
+```
+
+**removes** the front element but doesn't return it.
+
+So:
+
+```cpp
+cout << q.front();
+q.pop();
+```
+
+---
+
+# 4. Access Front
+
+### C++
+
+```cpp
+q.front();
+```
+
+### Java
+
+```java
+q.peek();
+```
+
+### Python Deque
+
+```python
+q[0]
+```
+
+### Python List
+
+```python
+q[0]
+```
+
+### Python Queue
+
+`queue.Queue` doesn't provide direct indexing/front access.
+
+| C++       | Java     | Python               |
+| --------- | -------- | -------------------- |
+| `front()` | `peek()` | `[0]` for list/deque |
+
+---
+
+# 5. Access Back
+
+This is an important difference.
+
+### C++
+
+```cpp
+q.back();
+```
+
+### Java
+
+The `Queue` interface does **not** provide a direct `back()` method.
+
+If you're specifically using `LinkedList`, you can do:
+
+```java
+q.getLast();
+```
+
+but the variable needs to expose that method through `LinkedList`, not just `Queue`.
+
+### Python Deque
+
+```python
+q[-1]
+```
+
+### Python List
+
+```python
+q[-1]
+```
+
+|      | C++      | Java `Queue` | Python `deque` |
+| ---- | -------- | ------------ | -------------- |
+| Back | `back()` | ❌            | `[-1]`         |
+
+---
+
+# 6. Check Empty
+
+### C++
+
+```cpp
+q.empty();
+```
+
+### Java
+
+```java
+q.isEmpty();
+```
+
+### Python Deque/List
+
+```python
+if not q:
+```
+
+### Python Queue
+
+```python
+q.empty()
+```
+
+| C++       | Java        | Python              |
+| --------- | ----------- | ------------------- |
+| `empty()` | `isEmpty()` | `not q` / `empty()` |
+
+---
+
+# 7. Size
+
+### C++
+
+```cpp
+q.size();
+```
+
+### Java
+
+```java
+q.size();
+```
+
+### Python Deque/List
+
+```python
+len(q)
+```
+
+### Python Queue
+
+```python
+q.qsize()
+```
+
+| C++      | Java     | Python  |
+| -------- | -------- | ------- |
+| `size()` | `size()` | `len()` |
+
+---
+
+# 🔥 8. Complete Comparison
+
+| Operation | C++ `queue`  | Java `Queue`     | Python `deque` |
+| --------- | ------------ | ---------------- | -------------- |
+| Create    | `queue<int>` | `Queue<Integer>` | `deque()`      |
+| Add       | `push()`     | `offer()`        | `append()`     |
+| Remove    | `pop()`      | `poll()`         | `popleft()`    |
+| Front     | `front()`    | `peek()`         | `[0]`          |
+| Back      | `back()`     | ❌                | `[-1]`         |
+| Size      | `size()`     | `size()`         | `len()`        |
+| Empty     | `empty()`    | `isEmpty()`      | `not q`        |
+| Principle | FIFO         | FIFO             | FIFO           |
+
+---
+
+# 🔥 Python Queue Comparison
+
+Python actually gives you **three common ways** to make a queue.
+
+| Feature       | `list`      | `collections.deque` | `queue.Queue`     |
+| ------------- | ----------- | ------------------- | ----------------- |
+| Add           | `append()`  | `append()`          | `put()`           |
+| Remove        | `pop(0)`    | `popleft()`         | `get()`           |
+| Front         | `[0]`       | `[0]`               | No direct access  |
+| Back          | `[-1]`      | `[-1]`              | No direct access  |
+| Size          | `len()`     | `len()`             | `qsize()`         |
+| Empty         | `not q`     | `not q`             | `empty()`         |
+| Front removal | O(n)        | O(1)                | O(1)              |
+| Main use      | Simple list | Fast queue          | Thread-safe queue |
+
+### ⭐ For DSA practice:
+
+```text
+Python → collections.deque
+```
+
+is generally the best choice for a normal queue.
+
+---
+
+# 🧠 Stack vs Queue vs Deque
+
+Since you've now learned all three:
+
+|               | Stack      | Queue                | Deque                            |
+| ------------- | ---------- | -------------------- | -------------------------------- |
+| Principle     | LIFO       | FIFO                 | Both ends                        |
+| Add           | Top        | Back                 | Front/Back                       |
+| Remove        | Top        | Front                | Front/Back                       |
+| C++ add       | `push()`   | `push()`             | `push_front()` / `push_back()`   |
+| C++ remove    | `pop()`    | `pop()`              | `pop_front()` / `pop_back()`     |
+| C++ access    | `top()`    | `front()` / `back()` | `front()` / `back()`             |
+| Java add      | `push()`   | `offer()`            | `addFirst()` / `addLast()`       |
+| Java remove   | `pop()`    | `poll()`             | `removeFirst()` / `removeLast()` |
+| Java access   | `peek()`   | `peek()`             | `getFirst()` / `getLast()`       |
+| Python add    | `append()` | `append()`           | `append()` / `appendleft()`      |
+| Python remove | `pop()`    | `popleft()`          | `pop()` / `popleft()`            |
+
+---
+
+## 🔥 Easy Memory Trick
+
+```text
+STACK
+Last In → First Out
+
+10 → 20 → 30
+          ↑
+        remove
+```
+
+```text
+QUEUE
+First In → First Out
+
+10 → 20 → 30
+ ↑
+remove
+```
+
+```text
+DEQUE
+Both ends
+
+       FRONT              BACK
+         ↓                  ↓
+      [10][20][30][40]
+         ↑                  ↑
+      remove              remove
+      /add                 /add
+```
+
+### The 3 words to remember:
+
+**Stack → LIFO**
+
+**Queue → FIFO**
+
+**Deque → BOTH ENDS** 🔥
+
+
+
+
+C++ 
+
+#include <iostream>
+#include <queue>
+
+int main() {
+    std::queue<int> myQueue;
+    
+    // Push elements to the queue
+    myQueue.push(10); // {10}
+    myQueue.push(20); // {10, 20}
+    myQueue.push(30); // front -> {10, 20, 30} -> back
+    
+    // Front and Back
+    std::cout << "Front element: " << myQueue.front() << std::endl; // Output: Front element: 10
+    std::cout << "Back element: " << myQueue.back() << std::endl;   // Output: Back element: 30
+    
+    // Pop the front element
+    myQueue.pop();
+    std::cout << "After popping, front element: " << myQueue.front() << std::endl; // Output: After popping, front element: 20
+    return 0;
+}
+
+
+JAVA 
+
+import java.util.Queue;
+import java.util.LinkedList;
+
+public class Main {
+    public static void main(String[] args) {
+        Queue<Integer> myQueue = new LinkedList<>();
+
+        // Adding elements to the queue
+        myQueue.offer(10); // {10}
+        myQueue.offer(20); // {10, 20}
+        myQueue.offer(30); // front -> {10, 20, 30} -> back
+
+        // Accessing front and back elements
+        System.out.println("Front element: " + myQueue.peek());  // 10
+        // (Note: In Queue, back element access is not directly supported)
+
+        // Removing the front element
+        myQueue.poll(); 
+        System.out.println("After polling, front element: " + myQueue.peek()); // 20
+
+        // Queue size and empty check
+        System.out.println("Queue size: " + myQueue.size()); // 2
+        System.out.println("Is the queue empty? " + myQueue.isEmpty()); // false
+    }
+} 
+
+PYTHON 
+
+queue = []
+queue.append('a')
+queue.append('b')
+queue.append('c')
+print("Initial queue")
+print(queue)
+print("\nElements dequeued from queue")
+print(queue.pop(0))
+print(queue.pop(0))
+print(queue.pop(0))
+print("\nQueue after removing elements")
+print(queue) 
+
+
+from collections import deque
+q = deque()
+q.append('a')
+q.append('b')
+q.append('c')
+print("Initial queue")
+print(q)
+print("\nElements dequeued from the queue")
+print(q.popleft())
+print(q.popleft())
+print(q.popleft())
+
+print("\nQueue after removing elements")
+print(q)
