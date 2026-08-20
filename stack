@@ -1,0 +1,403 @@
+Yep machi 🔥 Now let's do the **same clean differentiation for Stack in C++, Java, and Python**, just like we did for List/Deque.
+
+# 🔥 Stack — C++ vs Java vs Python
+
+All three follow the same principle:
+
+> **LIFO — Last In, First Out**
+
+```text
+        TOP
+         ↓
+       [30]  ← remove first
+       [20]
+       [10]
+      BOTTOM
+```
+
+---
+
+## 1. Creating a Stack
+
+| Language         | Syntax                                |
+| ---------------- | ------------------------------------- |
+| **C++**          | `stack<int> stk;`                     |
+| **Java**         | `Stack<Integer> stk = new Stack<>();` |
+| **Python List**  | `stack = []`                          |
+| **Python Deque** | `stack = deque()`                     |
+
+---
+
+# 2. Push / Add
+
+### C++
+
+```cpp
+stk.push(10);
+```
+
+### Java
+
+```java
+stk.push(10);
+```
+
+### Python List
+
+```python
+stack.append(10)
+```
+
+### Python Deque
+
+```python
+stack.append(10)
+```
+
+| Operation | C++      | Java     | Python     |
+| --------- | -------- | -------- | ---------- |
+| Push      | `push()` | `push()` | `append()` |
+
+🔥 **Easy:** C++ and Java → `push()` | Python → `append()`
+
+---
+
+# 3. Pop / Remove
+
+### C++
+
+```cpp
+stk.pop();
+```
+
+### Java
+
+```java
+stk.pop();
+```
+
+### Python
+
+```python
+stack.pop()
+```
+
+| Operation | C++     | Java    | Python  |
+| --------- | ------- | ------- | ------- |
+| Pop       | `pop()` | `pop()` | `pop()` |
+
+🔥 This one is easy — **all three use `pop()`**.
+
+---
+
+# 4. Access Top Element
+
+This is where names change.
+
+### C++
+
+```cpp
+stk.top();
+```
+
+### Java
+
+```java
+stk.peek();
+```
+
+### Python
+
+Python list:
+
+```python
+stack[-1]
+```
+
+Python deque:
+
+```python
+stack[-1]
+```
+
+| Operation | C++     | Java     | Python |
+| --------- | ------- | -------- | ------ |
+| Top       | `top()` | `peek()` | `[-1]` |
+
+---
+
+# 5. Check Empty
+
+### C++
+
+```cpp
+stk.empty();
+```
+
+### Java
+
+```java
+stk.empty();
+```
+
+### Python
+
+```python
+if not stack:
+```
+
+| Operation | C++       | Java      | Python      |
+| --------- | --------- | --------- | ----------- |
+| Empty     | `empty()` | `empty()` | `not stack` |
+
+---
+
+# 6. Get Size
+
+### C++
+
+```cpp
+stk.size();
+```
+
+### Java
+
+```java
+stk.size();
+```
+
+### Python
+
+```python
+len(stack)
+```
+
+| Operation | C++      | Java     | Python  |
+| --------- | -------- | -------- | ------- |
+| Size      | `size()` | `size()` | `len()` |
+
+---
+
+# 7. Search
+
+Java's `Stack` has a `search()` method.
+
+### Java
+
+```java
+int position = stk.search(10);
+```
+
+If:
+
+```text
+Top
+ ↓
+30
+20
+10
+```
+
+Then:
+
+```java
+stk.search(10);
+```
+
+returns:
+
+```text
+3
+```
+
+⚠️ Java `search()` uses a **1-based position from the top**.
+
+C++ `stack` doesn't provide a direct `search()` function.
+
+Python doesn't have a stack-specific `search()` method either. If using a list, you can use:
+
+```python
+stack.index(10)
+```
+
+But that's an **index from the bottom**, starting at `0`, so don't confuse it with Java's `search()`.
+
+---
+
+# 8. Swap
+
+C++ has a direct `swap()` operation.
+
+```cpp
+stk.swap(anotherStk);
+```
+
+Java:
+
+```java
+Collections.swap(...)
+```
+
+is **not the same thing** — it swaps elements at positions, not two entire stacks.
+
+Python can swap two variables:
+
+```python
+stack1, stack2 = stack2, stack1
+```
+
+So don't memorize them as equivalent stack methods.
+
+---
+
+# 🔥 Complete Comparison
+
+| Operation | C++          | Java                 | Python           |
+| --------- | ------------ | -------------------- | ---------------- |
+| Create    | `stack<int>` | `Stack<Integer>`     | `[]` / `deque()` |
+| Push      | `push()`     | `push()`             | `append()`       |
+| Pop       | `pop()`      | `pop()`              | `pop()`          |
+| Top       | `top()`      | `peek()`             | `[-1]`           |
+| Empty     | `empty()`    | `empty()`            | `not stack`      |
+| Size      | `size()`     | `size()`             | `len()`          |
+| Search    | ❌            | `search()`           | `index()`*       |
+| Swap      | `swap()`     | No direct equivalent | `a,b=b,a`        |
+| Principle | LIFO         | LIFO                 | LIFO             |
+
+`index()` isn't specifically a stack operation.
+
+---
+
+# 🧠 Example
+
+Suppose we perform:
+
+```text
+Push 10
+Push 20
+Push 30
+Pop
+```
+
+### C++
+
+```cpp
+stack<int> stk;
+
+stk.push(10);
+stk.push(20);
+stk.push(30);
+
+stk.pop();
+```
+
+Final:
+
+```text
+20
+10
+```
+
+### Java
+
+```java
+Stack<Integer> stk = new Stack<>();
+
+stk.push(10);
+stk.push(20);
+stk.push(30);
+
+stk.pop();
+```
+
+Final:
+
+```text
+20
+10
+```
+
+### Python
+
+```python
+stack = []
+
+stack.append(10)
+stack.append(20)
+stack.append(30)
+
+stack.pop()
+```
+
+Final:
+
+```text
+[10, 20]
+```
+
+Same behavior. Different syntax. 🔥
+
+---
+
+# ⭐ Stack vs Deque
+
+Since you just learned Deque, this is important.
+
+|                  | Stack           | Deque               |
+| ---------------- | --------------- | ------------------- |
+| Principle        | LIFO            | Both ends           |
+| Add front        | ❌               | ✅                   |
+| Add back         | Stack top       | ✅                   |
+| Remove front     | ❌               | ✅                   |
+| Remove back      | Stack top       | ✅                   |
+| Access top/front | ✅               | ✅                   |
+| Main purpose     | LIFO operations | Both-end operations |
+
+Think:
+
+```text
+STACK
+
+       TOP
+        ↓
+      [30] ← push/pop
+      [20]
+      [10]
+```
+
+versus:
+
+```text
+DEQUE
+
+FRONT                 BACK
+  ↓                     ↓
+[10] [20] [30] [40]
+ ↑                     ↑
+add/remove          add/remove
+```
+
+### 🔥 One-line memory trick
+
+```text
+STACK
+C++    → push(), pop(), top()
+Java   → push(), pop(), peek()
+Python → append(), pop(), [-1]
+```
+
+```text
+DEQUE
+C++    → push_front(), push_back()
+         pop_front(), pop_back()
+
+Java   → addFirst(), addLast()
+         removeFirst(), removeLast()
+
+Python → appendleft(), append()
+         popleft(), pop()
+```
+
+**Stack = one end.**
+
+**Deque = both ends.** 💯
