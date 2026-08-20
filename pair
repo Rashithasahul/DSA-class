@@ -291,39 +291,28 @@ So for your current STL journey, **`vector<pair<int,int>>` is definitely worth p
 
 IN JAVA 
 
-class Pair<A, B> {
-    A first;
-    B second;
-
-    Pair(A first, B second) {
-        this.first = first;
-        this.second = second;
-    }
-}
-
-class Main {
+import java.util.AbstractMap.SimpleEntry;
+public class Main {
     public static void main(String[] args) {
 
-        Pair<Integer, Double> myPair =
-            new Pair<>(42, 3.14159);
+        SimpleEntry<Integer, String> entry = new SimpleEntry<>(1, "One");
 
-        Pair<Integer, Character> myPair1 =
-            new Pair<>(0, 'a');
+        // Accessing the values
+        Integer key = entry.getKey();
+        String value = entry.getValue();
 
-        Pair<Integer, String> myPair2 =
-            new Pair<>(21, "Hello World");
+        // Printing the values
+        System.out.println("Key: " + key + ", Value: " + value); // key -> 1 and value -> "One"
 
-        System.out.println(
-            "1st Pair: " + myPair.first + " " + myPair.second
-        );
+        // Equality Check
+        SimpleEntry<Integer, String> entry2 = new SimpleEntry<>(1, "One");
+        System.out.println("Is entry equal to entry2? " + entry.equals(entry2)); // Two entries are equals -> true
 
-        System.out.println(
-            "2nd Pair: " + myPair1.first + " " + myPair1.second
-        );
+        // String Representation
+        System.out.println("String representation: " + entry.toString()); // String -> "1=One"
 
-        System.out.println(
-            "3rd Pair: " + myPair2.first + " " + myPair2.second
-        );
+        // Hash Code
+        System.out.println("Hash code: " + entry.hashCode()); // Hash Code of entry is 79431
     }
 }
 
