@@ -1,0 +1,370 @@
+Exactly 👍 Now you're moving to **Deque**. The nice part is that C++, Java, and Python all have a deque concept, but the method names are different.
+
+## 🔥 Deque — C++ vs Java vs Python
+
+Think of a deque as:
+
+```text
+        FRONT                 BACK
+          ↓                    ↓
+       [ 10 ][ 20 ][ 30 ][ 40 ]
+          ↑                    ↑
+      add/remove          add/remove
+```
+
+You can add/remove from **both ends**.
+
+---
+
+## 1. Creating a Deque
+
+### C++
+
+```cpp
+deque<int> dq;
+```
+
+### Java
+
+```java
+Deque<Integer> dq = new ArrayDeque<>();
+```
+
+### Python
+
+```python
+from collections import deque
+
+dq = deque()
+```
+
+So:
+
+```text
+C++       → deque
+Java      → Deque + ArrayDeque
+Python    → collections.deque
+```
+
+---
+
+# 2. Add at the Front
+
+### C++
+
+```cpp
+dq.push_front(10);
+```
+
+### Java
+
+```java
+dq.addFirst(10);
+```
+
+### Python
+
+```python
+dq.appendleft(10)
+```
+
+```text
+C++       → push_front()
+Java      → addFirst()
+Python    → appendleft()
+```
+
+---
+
+# 3. Add at the Back
+
+### C++
+
+```cpp
+dq.push_back(20);
+```
+
+### Java
+
+```java
+dq.addLast(20);
+```
+
+### Python
+
+```python
+dq.append(20)
+```
+
+```text
+C++       → push_back()
+Java      → addLast()
+Python    → append()
+```
+
+---
+
+# 4. Remove from Front
+
+### C++
+
+```cpp
+dq.pop_front();
+```
+
+### Java
+
+```java
+dq.removeFirst();
+```
+
+### Python
+
+```python
+dq.popleft()
+```
+
+```text
+C++       → pop_front()
+Java      → removeFirst()
+Python    → popleft()
+```
+
+---
+
+# 5. Remove from Back
+
+### C++
+
+```cpp
+dq.pop_back();
+```
+
+### Java
+
+```java
+dq.removeLast();
+```
+
+### Python
+
+```python
+dq.pop()
+```
+
+```text
+C++       → pop_back()
+Java      → removeLast()
+Python    → pop()
+```
+
+---
+
+# 6. Access Front
+
+### C++
+
+```cpp
+cout << dq.front();
+```
+
+### Java
+
+```java
+System.out.println(dq.getFirst());
+```
+
+### Python
+
+```python
+print(dq[0])
+```
+
+---
+
+# 7. Access Back
+
+### C++
+
+```cpp
+cout << dq.back();
+```
+
+### Java
+
+```java
+System.out.println(dq.getLast());
+```
+
+### Python
+
+```python
+print(dq[-1])
+```
+
+---
+
+# 🔥 Complete Example
+
+Suppose we start with:
+
+```text
+[1, 2, 3]
+```
+
+### C++
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+
+    deque<int> dq = {1, 2, 3};
+
+    dq.push_front(0);
+    dq.push_back(4);
+
+    cout << "Front: " << dq.front() << endl;
+    cout << "Back: " << dq.back() << endl;
+
+    dq.pop_front();
+    dq.pop_back();
+
+    for(auto x : dq) {
+        cout << x << " ";
+    }
+
+    return 0;
+}
+```
+
+Output:
+
+```text
+Front: 0
+Back: 4
+1 2 3
+```
+
+---
+
+### Java
+
+```java
+import java.util.*;
+
+class Main {
+    public static void main(String[] args) {
+
+        Deque<Integer> dq = new ArrayDeque<>();
+
+        dq.addLast(1);
+        dq.addLast(2);
+        dq.addLast(3);
+
+        dq.addFirst(0);
+        dq.addLast(4);
+
+        System.out.println("Front: " + dq.getFirst());
+        System.out.println("Back: " + dq.getLast());
+
+        dq.removeFirst();
+        dq.removeLast();
+
+        for(int x : dq) {
+            System.out.print(x + " ");
+        }
+    }
+}
+```
+
+---
+
+### Python
+
+```python
+from collections import deque
+
+dq = deque([1, 2, 3])
+
+dq.appendleft(0)
+dq.append(4)
+
+print("Front:", dq[0])
+print("Back:", dq[-1])
+
+dq.popleft()
+dq.pop()
+
+for x in dq:
+    print(x, end=" ")
+```
+
+---
+
+# 🧠 Most Important Comparison
+
+| Operation    | C++            | Java             | Python         |
+| ------------ | -------------- | ---------------- | -------------- |
+| Create       | `deque<int>`   | `Deque<Integer>` | `deque()`      |
+| Add front    | `push_front()` | `addFirst()`     | `appendleft()` |
+| Add back     | `push_back()`  | `addLast()`      | `append()`     |
+| Remove front | `pop_front()`  | `removeFirst()`  | `popleft()`    |
+| Remove back  | `pop_back()`   | `removeLast()`   | `pop()`        |
+| Get front    | `front()`      | `getFirst()`     | `[0]`          |
+| Get back     | `back()`       | `getLast()`      | `[-1]`         |
+| Size         | `size()`       | `size()`         | `len()`        |
+| Empty        | `empty()`      | `isEmpty()`      | `not dq`       |
+
+---
+
+## ⚡ One important difference: `offer` / `poll` in Java
+
+Java `Deque` gives you two styles.
+
+For example:
+
+```java
+dq.addFirst(10);
+dq.removeFirst();
+```
+
+and:
+
+```java
+dq.offerFirst(10);
+dq.pollFirst();
+```
+
+The distinction is mainly about **how failure is handled** when an operation cannot be performed.
+
+For normal `ArrayDeque` practice, you can initially focus on:
+
+```java
+addFirst()
+addLast()
+removeFirst()
+removeLast()
+getFirst()
+getLast()
+```
+
+Then learn `offer`/`poll` when you study **Queue**.
+
+### 🧠 Easy memory trick
+
+```text
+              FRONT                    BACK
+
+C++       push_front()             push_back()
+          pop_front()              pop_back()
+
+Java      addFirst()               addLast()
+          removeFirst()            removeLast()
+
+Python    appendleft()             append()
+          popleft()                pop()
+```
+
+If you've understood **Vector/List + Pair + Iterator**, Deque is a nice next step because the main idea is simply: **"I can work from both ends."** 🔥
