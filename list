@@ -632,3 +632,22 @@ class Example {
     }
 }
 
+
+
+
+
+| Feature                         | C++                                | Java                              | Python                          |
+| ------------------------------- | ---------------------------------- | --------------------------------- | ------------------------------- |
+| **Normal List / Dynamic Array** | `vector`                           | `ArrayList`                       | `list`                          |
+| **Linked List**                 | `list`                             | `LinkedList`                      | No built-in equivalent          |
+| **Deque**                       | `deque`                            | `ArrayDeque`                      | `collections.deque`             |
+| **Add at back**                 | `push_back()`                      | `add()` / `addLast()`             | `append()`                      |
+| **Add at front**                | `push_front()`*                    | `addFirst()`*                     | `insert(0,x)` / `appendleft()`* |
+| **Remove at back**              | `pop_back()`                       | `remove(size-1)` / `removeLast()` | `pop()`                         |
+| **Remove at front**             | `erase(begin())`* / `pop_front()`* | `remove(0)` / `removeFirst()`     | `pop(0)` / `popleft()`          |
+| **Access by index**             | `v[i]`                             | `list.get(i)`                     | `list[i]`                       |
+| **Get front**                   | `front()`                          | `getFirst()`                      | `[0]`                           |
+| **Get back**                    | `back()`                           | `getLast()`                       | `[-1]`                          |
+| **Size**                        | `size()`                           | `size()`                          | `len()`                         |
+| **Clear**                       | `clear()`                          | `clear()`                         | `clear()`                       |
+| **Iterator / traversal**        | `for(auto x : c)`                  | `for(int x : c)`                  | `for x in c`                    |
