@@ -802,3 +802,151 @@ C++    → multiset
 Java   → TreeMap
 Python → Counter
 ```
+
+
+C++ 
+
+#include <iostream>
+#include <set>
+using namespace std;
+
+int main() {
+    multiset<int> myMultiset;
+    // Insert
+    myMultiset.insert(5); // {5}
+    myMultiset.insert(2); // {2, 5}
+    myMultiset.insert(5); // {2, 5, 5}
+    myMultiset.insert(8); // {2, 5, 5, 8}
+    myMultiset.insert(2); // {2, 2, 5, 5, 8}
+    myMultiset.insert(5); // {2, 2, 5, 5, 5, 8}
+    myMultiset.insert(9); // {2, 2, 5, 5, 5, 8, 9}
+    // Erase
+    myMultiset.erase(5); // {2, 2, 8, 9}
+    // Find
+    auto it = myMultiset.find(2);
+    if (it != myMultiset.end()) {
+        cout << "Found: " << *it << endl; // Found
+    }
+    myMultiset.insert(2); // {2, 2, 2, 8, 9}
+
+    myMultiset.erase(myMultiset.find(2)); // {2,2,8,9} -> remove single element from multiple element of 2
+    // Count
+    int count = myMultiset.count(2);
+    cout << "Count of 2: " << count << endl;
+    return 0;
+}
+
+
+JAVA 
+
+import java.util.TreeMap;
+import java.util.Map;
+import java.util.Set;
+
+class Multiset<E> {
+    private Map<E, Integer> map = new TreeMap<>();
+
+    // Add an element to the multiset
+    public void add(E element) {
+        map.put(element, map.getOrDefault(element, 0) + 1);
+    }
+
+    // Add multiple instances of an element to the multiset
+    public void add(E element, int occurrences) {
+        if (occurrences < 0) throw new IllegalArgumentException("Occurrences cannot be negative.");
+        map.put(element, map.getOrDefault(element, 0) + occurrences);
+    }
+
+    // Remove one occurrence of an element
+    public void remove(E element) {
+        map.computeIfPresent(element, (key, count) -> count > 1 ? count - 1 : null);
+    }
+
+    // Remove multiple occurrences of an element
+    public void remove(E element, int occurrences) {
+        if (occurrences < 0) throw new IllegalArgumentException("Occurrences cannot be negative.");
+        map.computeIfPresent(element, (key, count) -> count > occurrences ? count - occurrences : null);
+    }
+
+    // Get the count of an element in the multiset
+    public int count(E element) {
+        return map.getOrDefault(element, 0);
+    }
+
+    // Get the set of elements
+    public Set<E> elementSet() {
+        return map.keySet();
+    }
+
+    // Get the total size of the multiset
+    public int size() {
+        return map.values().stream().mapToInt(Integer::intValue).sum();
+    }
+
+    // Check if the multiset is empty
+    public boolean isEmpty() {
+        return map.isEmpty();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Multiset<String> myMultiset = new Multiset<>();
+
+        // Adding elements
+        myMultiset.add("banana");
+        myMultiset.add("apple");
+        myMultiset.add("apple");
+        myMultiset.add("banana", 2);
+        myMultiset.add("apple", 3);  // Adds three more apples
+        myMultiset.add("banana", 3);
+
+        // Removing elements
+        myMultiset.remove("apple");  // Removes one apple
+
+        // Checking counts
+        System.out.println("Count of apples: " + myMultiset.count("apple")); // 4
+        System.out.println("Count of bananas: " + myMultiset.count("banana")); // 1
+
+        // Iterating over multiset
+        System.out.println("Elements in the multiset:");
+        myMultiset.elementSet().forEach(element ->
+            System.out.println(element + " x " + myMultiset.count(element)));
+
+        // Checking if multiset is empty
+        System.out.println("\nIs multiset empty? " + myMultiset.isEmpty());  // Output: false
+
+        // Total size of the multiset
+        System.out.println("Total size of multiset: " + myMultiset.size());  // Output: 3
+    }
+}
+
+
+PYTHON 
+
+from collections import Counter
+
+# Create a Multi-Set using Counter
+multi_set = Counter()
+
+# Insert elements into the Multi-Set
+multi_set.update([5])  # {5}
+multi_set.update([2])  # {2, 5}
+multi_set.update([5])  # {2, 5, 5}
+multi_set.update([8])  # {2, 5, 5, 8}
+multi_set.update([2])  # {2, 2, 5, 5, 8}
+multi_set.update([5])  # {2, 2, 5, 5, 5, 8}
+multi_set.update([9])  # {2, 2, 5, 5, 5, 8, 9}
+
+# Erase elements from the Multi-Set
+multi_set.subtract([5])  # {2, 2, 8, 9}
+
+# Find
+if 2 in multi_set:
+    print("Found:", 2)  # Found
+
+# Count
+count = multi_set[2]
+print("Count of 2:", count)  # 2
+
+
