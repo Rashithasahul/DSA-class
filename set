@@ -1,0 +1,522 @@
+Absolutely machi 👍 Your notes mix **C++ `set`**, **Java `LinkedHashSet` / `TreeSet`**, and **Python OrderedSet**. The biggest thing to understand is that **“Set” does not behave the same way in all three languages**.
+
+Let’s break it down clearly.
+
+# 1. What is a Set?
+
+A **Set** is a collection that mainly focuses on:
+
+* ✅ No duplicate elements
+* ✅ Easy searching
+* ✅ Adding/removing elements
+* ⚠️ Ordering depends on the implementation/language
+
+Example:
+
+```text
+Input:  5  2  5  8  2  1
+
+Set:    1  2  5  8
+```
+
+The duplicate `5` and `2` are removed.
+
+---
+
+# 2. C++ `set`
+
+C++ provides:
+
+```cpp
+set<int> s;
+```
+
+A C++ `set` has **two important properties**:
+
+| Property            | C++ `set`    |
+| ------------------- | ------------ |
+| Unique              | ✅ Yes        |
+| Sorted              | ✅ Yes        |
+| Duplicate allowed   | ❌ No         |
+| Default order       | Ascending    |
+| Main implementation | Balanced BST |
+
+Example:
+
+```cpp
+set<int> s;
+
+s.insert(5);
+s.insert(2);
+s.insert(8);
+s.insert(2);
+s.insert(1);
+
+for(int x : s) {
+    cout << x << " ";
+}
+```
+
+Output:
+
+```text
+1 2 5 8
+```
+
+Even though we inserted:
+
+```text
+5 2 8 2 1
+```
+
+the set automatically stores them in sorted order.
+
+### Important
+
+```cpp
+s.insert(2);
+s.insert(2);
+```
+
+The second `2` is ignored.
+
+---
+
+# 3. Important C++ Set Operations
+
+### `insert()`
+
+Adds an element.
+
+```cpp
+s.insert(10);
+```
+
+### `erase(value)`
+
+Removes using the value.
+
+```cpp
+s.erase(10);
+```
+
+### `find()`
+
+Searches for an element.
+
+```cpp
+auto it = s.find(10);
+```
+
+If found:
+
+```cpp
+it != s.end()
+```
+
+If not found:
+
+```cpp
+it == s.end()
+```
+
+### `count()`
+
+Checks whether an element exists.
+
+```cpp
+s.count(10);
+```
+
+For a normal `set`, the result can only be:
+
+```text
+0 → doesn't exist
+1 → exists
+```
+
+Example:
+
+```cpp
+cout << s.count(8);
+```
+
+Output:
+
+```text
+1
+```
+
+---
+
+# 4. Java Set
+
+Java is slightly different.
+
+Java has the `Set` interface, and different implementations provide different ordering behavior.
+
+The two important ones from your notes are:
+
+```text
+LinkedHashSet
+TreeSet
+```
+
+And there is also:
+
+```text
+HashSet
+```
+
+The easiest way to remember:
+
+```text
+HashSet       → Unique, no guaranteed order
+LinkedHashSet → Unique + insertion order
+TreeSet       → Unique + sorted order
+```
+
+This distinction is **very important**.
+
+---
+
+# 5. Java `LinkedHashSet`
+
+Syntax:
+
+```java
+Set<String> set = new LinkedHashSet<>();
+```
+
+It maintains **insertion order**.
+
+Example:
+
+```java
+Set<Integer> s = new LinkedHashSet<>();
+
+s.add(5);
+s.add(2);
+s.add(8);
+s.add(2);
+s.add(1);
+
+System.out.println(s);
+```
+
+Output:
+
+```text
+[5, 2, 8, 1]
+```
+
+Notice:
+
+```text
+Inserted: 5 2 8 2 1
+Output:   5 2 8 1
+```
+
+The duplicate `2` is removed, but the remaining elements stay in the order they were inserted.
+
+### So:
+
+**LinkedHashSet = Unique + Insertion Order**
+
+---
+
+# 6. Java `TreeSet`
+
+Syntax:
+
+```java
+Set<Integer> s = new TreeSet<>();
+```
+
+`TreeSet` automatically sorts the elements.
+
+Example:
+
+```java
+Set<Integer> s = new TreeSet<>();
+
+s.add(5);
+s.add(2);
+s.add(8);
+s.add(2);
+s.add(1);
+
+System.out.println(s);
+```
+
+Output:
+
+```text
+[1, 2, 5, 8]
+```
+
+So:
+
+**TreeSet = Unique + Sorted Order**
+
+---
+
+# 7. LinkedHashSet vs TreeSet
+
+This is probably the most important comparison for your current topic.
+
+| Feature         | LinkedHashSet            | TreeSet        |
+| --------------- | ------------------------ | -------------- |
+| Duplicate       | ❌ No                     | ❌ No           |
+| Insertion order | ✅ Yes                    | ❌ No           |
+| Sorted order    | ❌ No                     | ✅ Yes          |
+| Search          | Fast                     | Fast           |
+| Main structure  | Hash table + linked list | Tree           |
+| Example output  | `[5, 2, 8, 1]`           | `[1, 2, 5, 8]` |
+
+### Easy memory trick:
+
+```text
+LinkedHashSet → "Remember how I inserted"
+TreeSet       → "Sort what I inserted"
+```
+
+---
+
+# 8. Python Ordered Set
+
+Python doesn't have a built-in `OrderedSet` class like Java's `LinkedHashSet`.
+
+Your notes create one using:
+
+```python
+from collections import OrderedDict
+```
+
+The idea is:
+
+```text
+OrderedDict
+     ↓
+keeps insertion order
+     +
+keys are unique
+     ↓
+OrderedSet
+```
+
+Example:
+
+```python
+s.add(5)
+s.add(2)
+s.add(8)
+s.add(2)
+s.add(1)
+
+print(s)
+```
+
+Output:
+
+```text
+{5, 2, 8, 1}
+```
+
+Again, duplicate `2` isn't added.
+
+So your Python implementation behaves similarly to Java's:
+
+```text
+LinkedHashSet
+```
+
+---
+
+# 9. C++ vs Java vs Python
+
+Here's the clean comparison you should remember:
+
+| Feature           | C++ `set`            | Java `LinkedHashSet` | Java `TreeSet` | Python OrderedSet        |
+| ----------------- | -------------------- | -------------------- | -------------- | ------------------------ |
+| Unique            | ✅                    | ✅                    | ✅              | ✅                        |
+| Sorted            | ✅                    | ❌                    | ✅              | ❌                        |
+| Insertion order   | ❌                    | ✅                    | ❌              | ✅                        |
+| Duplicate allowed | ❌                    | ❌                    | ❌              | ❌                        |
+| Search            | `find()` / `count()` | `contains()`         | `contains()`   | `in`                     |
+| Add               | `insert()`           | `add()`              | `add()`        | `add()`                  |
+| Remove            | `erase()`            | `remove()`           | `remove()`     | `remove()` / `discard()` |
+
+---
+
+# 10. The biggest difference: `count()` vs `contains()` vs `in`
+
+Each language uses a different way to check existence.
+
+### C++
+
+```cpp
+s.count(5);
+```
+
+or:
+
+```cpp
+s.find(5);
+```
+
+### Java
+
+```java
+s.contains(5);
+```
+
+### Python
+
+```python
+5 in s
+```
+
+So remember:
+
+```text
+C++    → count / find
+Java   → contains
+Python → in
+```
+
+---
+
+# 11. `remove()` vs `discard()` in Python
+
+This is another important point from your notes.
+
+### `remove()`
+
+```python
+s.remove(5)
+```
+
+If `5` exists → removes it.
+
+If `5` doesn't exist → **error**.
+
+### `discard()`
+
+```python
+s.discard(5)
+```
+
+If `5` exists → removes it.
+
+If `5` doesn't exist → **does nothing**.
+
+So:
+
+```text
+remove()  → "It must exist!"
+discard() → "Remove it if it's there."
+```
+
+That's a nice interview point. 😄
+
+---
+
+# 12. Set vs Priority Queue
+
+Since you just learned Priority Queue, don't mix these two.
+
+| Feature        | Set                       | Priority Queue          |
+| -------------- | ------------------------- | ----------------------- |
+| Duplicates     | ❌                         | ✅                       |
+| Main purpose   | Unique elements           | Highest/lowest priority |
+| Sorted/ordered | Depends on implementation | Heap order              |
+| Access         | Can iterate/search        | Mainly `top()`          |
+| Remove         | Specific element possible | Removes top priority    |
+| C++ example    | `set<int>`                | `priority_queue<int>`   |
+
+Example:
+
+### Set
+
+```text
+Input:  5 2 8 2 5
+
+Set:
+2 5 8
+```
+
+### Max Heap
+
+```text
+Input: 5 2 8 2 5
+
+Priority Queue:
+8 5 5 2 2
+```
+
+The priority queue **keeps duplicates**.
+
+---
+
+# 13. One-line memory trick 🧠
+
+Remember these four:
+
+```text
+C++ set
+→ Unique + Sorted
+
+Java LinkedHashSet
+→ Unique + Insertion Order
+
+Java TreeSet
+→ Unique + Sorted
+
+Python OrderedSet
+→ Unique + Insertion Order
+```
+
+And the Java family:
+
+```text
+HashSet
+    ↓
+Unique + No guaranteed order
+
+LinkedHashSet
+    ↓
+Unique + Insertion order
+
+TreeSet
+    ↓
+Unique + Sorted order
+```
+
+### Tiny example to lock it in
+
+Suppose we insert:
+
+```text
+10  5  20  5  15
+```
+
+Then:
+
+```text
+C++ set:
+5 10 15 20
+
+Java LinkedHashSet:
+10 5 20 15
+
+Java TreeSet:
+5 10 15 20
+
+Python OrderedSet:
+10 5 20 15
+```
+
+That's the core difference. Once this clicks, the Set family becomes much less confusing.
+
+**Next good practice:** solve one problem where you use **Priority Queue + Set together**—that'll make the difference between the two stick for real.
