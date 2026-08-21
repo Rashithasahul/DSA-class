@@ -1,0 +1,365 @@
+🗺️ Map — C++ vs Java vs Python
+
+Think of a Map like a dictionary:
+
+Key → Value
+
+Example:
+
+101 → "Rahul"
+102 → "Anu"
+103 → "Kumar"
+
+If I know the key, I can get the value.
+
+| Language   | Map-like structure | Easy memory                   |
+| ---------- | ------------------ | ----------------------------- |
+| **C++**    | `map`              | Sorted + Unique keys          |
+| **Java**   | `Map`              | Interface; commonly `HashMap` |
+| **Python** | `dict`             | Key → Value                   |
+
+
+Language	Map-like structure	Easy memory
+C++	map	Sorted + Unique keys
+Java	Map	Interface; commonly HashMap
+Python	dict	Key → Value
+🧠 Memory Trick
+
+C++ → map
+Java → Map + HashMap
+Python → dict
+
+That's the first thing to remember.
+
+
+MOST IMPORTANT DIFFERANCE 
+
+| Feature                     | C++ `map`   | Java `HashMap` | Python `dict` |
+| --------------------------- | ----------- | -------------- | ------------- |
+| Key-Value                   | ✅           | ✅              | ✅             |
+| Duplicate keys              | ❌           | ❌              | ❌             |
+| Automatically sorted by key | ✅           | ❌              | ❌             |
+| Maintains insertion order   | ❌           | ❌              | ✅ Python 3.7+ |
+| Average lookup              | `O(log n)`  | `O(1)`         | `O(1)`        |
+| Main idea                   | Sorted keys | Fast lookup    | Fast lookup   |
+
+
+3. Declaration — Compare Them
+C++
+map<int, string> m;
+
+Meaning:
+
+key   = int
+value = string
+Java
+Map<Integer, String> m = new HashMap<>();
+
+Meaning:
+
+key   = Integer
+value = String
+Python
+m = {}
+
+or
+
+m = {1: "Rahul", 2: "Anu"}
+
+Meaning:
+
+key   = int
+value = string
+🧠 Remember
+C++    → map<key, value>
+Java   → Map<Key, Value>
+Python → {key: value}
+4. Add / Insert Data
+
+Suppose we want:
+
+1 → Rahul
+2 → Anu
+3 → Kumar
+C++
+map<int, string> m;
+
+
+m[1] = "Rahul";
+m[2] = "Anu";
+m[3] = "Kumar";
+
+You can also use:
+
+m.insert({1, "Rahul"});
+
+or
+
+m.emplace(1, "Rahul");
+Java
+Map<Integer, String> m = new HashMap<>();
+
+
+m.put(1, "Rahul");
+m.put(2, "Anu");
+m.put(3, "Kumar");
+🧠 C++ vs Java
+C++  → m[key] = value
+Java → m.put(key, value)
+Python
+m = {}
+
+
+m[1] = "Rahul"
+m[2] = "Anu"
+m[3] = "Kumar"
+🧠 C++ and Python are very similar here
+C++     → m[1] = "Rahul"
+Python  → m[1] = "Rahul"
+
+
+Java    → m.put(1, "Rahul")
+5. Access a Value
+
+Suppose:
+
+1 → Rahul
+2 → Anu
+3 → Kumar
+
+We want the value of key 2.
+
+C++
+cout << m[2];
+
+Output:
+
+Anu
+Java
+System.out.println(m.get(2));
+
+Output:
+
+Anu
+Python
+print(m[2])
+
+Output:
+
+Anu
+🧠 Memory
+C++     → m[key]
+Java    → m.get(key)
+Python  → m[key]
+6. 🔥 Very Important: What if the Key Doesn't Exist?
+
+Suppose:
+
+m = {
+    1 → Rahul,
+    2 → Anu
+}
+
+What happens with key 10?
+
+C++
+cout << m[10];
+
+⚠️ Important!
+
+m[10] creates the key if it doesn't exist.
+
+For int value:
+
+10 → 0
+
+So the map changes.
+
+Java
+System.out.println(m.get(10));
+
+Output:
+
+null
+
+It does not insert the key.
+
+Python
+print(m[10])
+
+This produces a:
+
+KeyError
+
+Python alternative:
+
+print(m.get(10))
+
+Output:
+
+None
+🧠 SUPER IMPORTANT MEMORY
+C++     → m[key]       → creates missing key
+Java    → m.get(key)   → null
+Python  → m[key]       → KeyError
+Python  → m.get(key)   → None
+
+This is a very common interview question.
+
+7. Check Whether a Key Exists
+
+This is another important difference.
+
+C++
+if (m.find(10) != m.end())
+{
+    cout << "Found";
+}
+Java
+if (m.containsKey(10))
+{
+    System.out.println("Found");
+}
+Python
+if 10 in m:
+    print("Found")
+🧠 Memory Trick
+
+Think:
+
+C++     → find()
+Java    → containsKey()
+Python  → in
+8. Update Existing Value
+
+Suppose:
+
+1 → Rahul
+
+Change Rahul to Ravi.
+
+C++
+m[1] = "Ravi";
+Java
+m.put(1, "Ravi");
+Python
+m[1] = "Ravi"
+
+Result:
+
+1 → Ravi
+
+
+
+9. Duplicate Keys 🚫
+
+Suppose:
+
+1 → Rahul
+1 → Anu
+
+Can a Map have two 1s?
+
+C++
+
+❌ No
+
+m[1] = "Rahul";
+m[1] = "Anu";
+
+Final:
+
+1 → Anu
+
+The value is updated.
+
+Java HashMap
+
+❌ No
+
+m.put(1, "Rahul");
+m.put(1, "Anu");
+
+Final:
+
+1 → Anu
+Python dict
+
+❌ No
+
+m[1] = "Rahul"
+m[1] = "Anu"
+
+Final:
+
+1 → Anu
+🧠 Remember
+
+Map/HashMap/dict → one key can have only ONE value.
+
+If the same key is added again:
+
+Old value → replaced by new value
+
+10. How to Loop Through a Map
+C++
+for (auto i : m)
+{
+    cout << i.first << " " << i.second << endl;
+}
+
+Here:
+
+i.first  → key
+i.second → value
+Java
+for (Map.Entry<Integer, String> entry : m.entrySet())
+{
+    System.out.println(
+        entry.getKey() + " " + entry.getValue()
+    );
+}
+
+Here:
+
+entry.getKey()   → key
+entry.getValue() → value
+Python
+for key, value in m.items():
+    print(key, value)
+
+Here:
+
+key   → key
+value → value
+🧠 Memory Trick
+Language
+
+
+
+| Language | Key        | Value        |
+| -------- | ---------- | ------------ |
+| C++      | `i.first`  | `i.second`   |
+| Java     | `getKey()` | `getValue()` |
+| Python   | `key`      | `value`      |
+
+| Operation            | C++                   | Java                                      | Python         |
+| -------------------- | --------------------- | ----------------------------------------- | -------------- |
+| Declaration          | `map<int,string> m`   | `Map<Integer,String> m = new HashMap<>()` | `m = {}`       |
+| Add                  | `m[1]="A"`            | `m.put(1,"A")`                            | `m[1]="A"`     |
+| Update               | `m[1]="B"`            | `m.put(1,"B")`                            | `m[1]="B"`     |
+| Get                  | `m[1]`                | `m.get(1)`                                | `m[1]`         |
+| Check key            | `m.find(1)`           | `m.containsKey(1)`                        | `1 in m`       |
+| Loop                 | `i.first`, `i.second` | `getKey()`, `getValue()`                  | `key`, `value` |
+| Duplicate key        | ❌                     | ❌                                         | ❌              |
+| Sorted automatically | ✅ `map`               | ❌ `HashMap`                               | ❌              |
+| Missing key          | creates default       | `null`                                    | `KeyError`     |
+| Fast average lookup  | ❌ `O(log n)`          | ✅ `O(1)`                                  | ✅ `O(1)`       |
+
+
+
+
+
+
+
+
