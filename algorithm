@@ -1,0 +1,721 @@
+Absolutely, Machi 👍 This topic is basically **“same algorithm, different language syntax.”** Once you see the comparison, it becomes much easier to remember.
+
+# ⚡ Algorithms — C++ vs Java vs Python
+
+The main algorithms you have here are:
+
+1. `sort`
+2. Custom sorting
+3. Count set bits
+4. Generate permutations
+5. Find maximum
+
+---
+
+# 1. 🔃 Sorting
+
+Sorting means arranging elements in order.
+
+Example:
+
+```text
+Before:  13  5  17  9
+After:    5  9  13  17
+```
+
+## C++
+
+```cpp
+sort(a, a + n);
+```
+
+For vector:
+
+```cpp
+sort(v.begin(), v.end());
+```
+
+### Descending
+
+```cpp
+sort(a, a + n, greater<int>());
+```
+
+### 🧠 C++ memory
+
+> `sort(start, end)`
+
+---
+
+## Java
+
+Array:
+
+```java
+Arrays.sort(a);
+```
+
+List:
+
+```java
+Collections.sort(list);
+```
+
+Descending:
+
+```java
+Arrays.sort(a, Collections.reverseOrder());
+```
+
+⚠️ For descending `Arrays.sort`, use `Integer[]`, not `int[]`.
+
+### 🧠 Java memory
+
+> Array → `Arrays.sort()`
+> List → `Collections.sort()`
+
+---
+
+## Python
+
+```python
+a.sort()
+```
+
+or:
+
+```python
+a = sorted(a)
+```
+
+Descending:
+
+```python
+a.sort(reverse=True)
+```
+
+### Difference: `sort()` vs `sorted()`
+
+```python
+a.sort()
+```
+
+Changes the original list.
+
+```python
+sorted(a)
+```
+
+Creates and returns a sorted list.
+
+### 🧠 Python memory
+
+> `list.sort()` → modifies original
+> `sorted()` → returns sorted result
+
+---
+
+# ⭐ Sorting Comparison
+
+| Task                 | C++              | Java                                   | Python         |
+| -------------------- | ---------------- | -------------------------------------- | -------------- |
+| Array/List ascending | `sort()`         | `Arrays.sort()` / `Collections.sort()` | `sort()`       |
+| Descending           | `greater<int>()` | `Collections.reverseOrder()`           | `reverse=True` |
+| Custom sort          | Comparator       | `Comparator`                           | `key=lambda`   |
+
+---
+
+# 2. 🎯 Partial/Subarray Sorting
+
+Suppose:
+
+```text
+Index:  0  1  2  3  4  5
+Array:  13 5  17 9  70 43
+```
+
+You want to sort index `2` to `4`.
+
+---
+
+## C++
+
+```cpp
+sort(a + 2, a + 5);
+```
+
+Why `+5`?
+
+Because C++ uses:
+
+```text
+[start, end)
+```
+
+So:
+
+```text
+2 → included
+5 → excluded
+```
+
+Actually sorted indexes are:
+
+```text
+2, 3, 4
+```
+
+---
+
+## Java
+
+```java
+Arrays.sort(a, 2, 5);
+```
+
+Again:
+
+```text
+2 → included
+5 → excluded
+```
+
+---
+
+## Python
+
+Python uses slicing:
+
+```python
+a[2:5] = sorted(a[2:5])
+```
+
+Again:
+
+```text
+2 → included
+5 → excluded
+```
+
+### 🧠 Great memory trick
+
+All three use the same idea:
+
+```text
+start included
+end excluded
+```
+
+---
+
+# 3. 🎯 Custom Sorting
+
+This is where you tell the program:
+
+> "Don't use normal ascending order. I have my own sorting rule."
+
+Suppose we have:
+
+```text
+(8,4)
+(5,2)
+(8,6)
+```
+
+Requirement:
+
+1. First value → ascending
+2. If first values are equal → second value descending
+
+Expected:
+
+```text
+(5,2)
+(8,6)
+(8,4)
+```
+
+---
+
+## C++
+
+```cpp
+bool comparator(pair<int,int> p1, pair<int,int> p2)
+{
+    if(p1.first != p2.first)
+        return p1.first < p2.first;
+
+    return p1.second > p2.second;
+}
+```
+
+Then:
+
+```cpp
+sort(arr, arr + n, comparator);
+```
+
+### 🧠 C++ memory
+
+> Custom sorting → **Comparator function**
+
+---
+
+# Java
+
+Java commonly uses a `Comparator`.
+
+```java
+Arrays.sort(pairs, (p1, p2) -> {
+    if(p1.first != p2.first)
+        return Integer.compare(p1.first, p2.first);
+
+    return Integer.compare(p2.second, p1.second);
+});
+```
+
+### 🧠 Java memory
+
+> Custom sorting → **Comparator**
+
+---
+
+# Python
+
+Python makes this much shorter:
+
+```python
+arr.sort(key=lambda x: (x[0], -x[1]))
+```
+
+Meaning:
+
+```text
+x[0] → ascending
+-x[1] → descending
+```
+
+### 🧠 Python memory
+
+> Custom sorting → **`key=lambda`**
+
+---
+
+# ⭐ Custom Sort Comparison
+
+| Language | Main concept        |
+| -------- | ------------------- |
+| C++      | Comparator function |
+| Java     | `Comparator`        |
+| Python   | `key=lambda`        |
+
+---
+
+# 4. 🔢 Count Set Bits
+
+A **set bit** means a `1` in binary.
+
+Example:
+
+```text
+5 = 101
+```
+
+There are **two `1`s**.
+
+Therefore:
+
+```text
+set bits = 2
+```
+
+---
+
+## C++
+
+For `int`:
+
+```cpp
+__builtin_popcount(5);
+```
+
+For `long long`:
+
+```cpp
+__builtin_popcountll(x);
+```
+
+Example:
+
+```cpp
+int x = 5;
+
+cout << __builtin_popcount(x);
+```
+
+Output:
+
+```text
+2
+```
+
+### 🧠 C++ memory
+
+> `popcount` = count `1`s
+
+---
+
+# Java
+
+For `int`:
+
+```java
+Integer.bitCount(5);
+```
+
+For `long`:
+
+```java
+Long.bitCount(x);
+```
+
+Example:
+
+```java
+System.out.println(Integer.bitCount(5));
+```
+
+Output:
+
+```text
+2
+```
+
+### 🧠 Java memory
+
+> `Integer.bitCount()` / `Long.bitCount()`
+
+---
+
+# Python
+
+Python doesn't have the exact same function.
+
+Use:
+
+```python
+bin(5).count('1')
+```
+
+`bin(5)` gives:
+
+```text
+'0b101'
+```
+
+Then:
+
+```python
+.count('1')
+```
+
+counts the `1`s.
+
+Output:
+
+```text
+2
+```
+
+### 🧠 Python memory
+
+> `bin()` → binary
+> `.count('1')` → count set bits
+
+---
+
+# ⭐ Bit Count Comparison
+
+| Language      | Function                 |
+| ------------- | ------------------------ |
+| C++           | `__builtin_popcount()`   |
+| C++ long long | `__builtin_popcountll()` |
+| Java int      | `Integer.bitCount()`     |
+| Java long     | `Long.bitCount()`        |
+| Python        | `bin(x).count('1')`      |
+
+---
+
+# 5. 🔀 Generate Permutations
+
+Permutation means arranging the same elements in different orders.
+
+For:
+
+```text
+abc
+```
+
+Permutations are:
+
+```text
+abc
+acb
+bac
+bca
+cab
+cba
+```
+
+---
+
+# C++
+
+C++ has a direct STL function:
+
+```cpp
+next_permutation()
+```
+
+Example:
+
+```cpp
+string s = "bac";
+
+sort(s.begin(), s.end());
+
+do
+{
+    cout << s << endl;
+}
+while(next_permutation(s.begin(), s.end()));
+```
+
+First we sort:
+
+```text
+bac → abc
+```
+
+Then `next_permutation()` generates the next arrangement.
+
+### 🧠 C++ memory
+
+> Permutation → `next_permutation()`
+
+---
+
+# Java
+
+Java does **not** have a direct standard `next_permutation()` equivalent.
+
+You generally need to:
+
+* implement the next-permutation algorithm yourself, or
+* use a library.
+
+So don't memorize a standard Java function here like you do for C++.
+
+### 🧠 Java memory
+
+> No direct standard `next_permutation()`.
+
+---
+
+# Python
+
+Python has:
+
+```python
+from itertools import permutations
+```
+
+Then:
+
+```python
+from itertools import permutations
+
+s = "abc"
+
+for p in permutations(s):
+    print(''.join(p))
+```
+
+### 🧠 Python memory
+
+> Permutations → `itertools.permutations()`
+
+---
+
+# ⭐ Permutation Comparison
+
+| Language | Method                      |
+| -------- | --------------------------- |
+| C++      | `next_permutation()`        |
+| Java     | No direct standard function |
+| Python   | `itertools.permutations()`  |
+
+This is a **big difference** to remember.
+
+---
+
+# 6. 🏆 Find Maximum Element
+
+Suppose:
+
+```text
+13 5 17 9 70 43 15
+```
+
+Maximum is:
+
+```text
+70
+```
+
+---
+
+## C++
+
+```cpp
+int max_val = *max_element(a, a + n);
+```
+
+Why `*`?
+
+Because `max_element()` returns an **iterator/pointer** to the maximum element.
+
+So:
+
+```cpp
+*max_element(...)
+```
+
+gets the actual value.
+
+### 🧠 C++ memory
+
+> Maximum → `max_element()`
+
+---
+
+# Java
+
+You can use:
+
+```java
+Collections.max(list);
+```
+
+Example:
+
+```java
+Integer max = Collections.max(Arrays.asList(a));
+```
+
+### 🧠 Java memory
+
+> Maximum → `Collections.max()`
+
+---
+
+# Python
+
+Very simple:
+
+```python
+max_element = max(a)
+```
+
+### 🧠 Python memory
+
+> Maximum → `max()`
+
+---
+
+# 🔥 Maximum Comparison
+
+| Language | Function            |
+| -------- | ------------------- |
+| C++      | `max_element()`     |
+| Java     | `Collections.max()` |
+| Python   | `max()`             |
+
+---
+
+# 🧠 FULL ALGORITHM CHEAT SHEET
+
+This is the part I'd actually memorize.
+
+| Operation        | C++                    | Java                        | Python                     |
+| ---------------- | ---------------------- | --------------------------- | -------------------------- |
+| **Sort**         | `sort()`               | `Arrays.sort()`             | `list.sort()`              |
+| **Descending**   | `greater<int>()`       | `reverseOrder()`            | `reverse=True`             |
+| **Custom sort**  | Comparator             | Comparator                  | `key=lambda`               |
+| **Count 1 bits** | `__builtin_popcount()` | `Integer.bitCount()`        | `bin(x).count('1')`        |
+| **Permutation**  | `next_permutation()`   | No direct standard function | `itertools.permutations()` |
+| **Maximum**      | `max_element()`        | `Collections.max()`         | `max()`                    |
+
+---
+
+# 🎯 Super Easy Memory Method
+
+Don't try to memorize all the code. Memorize the **keyword** for each language:
+
+```text
+SORT
+C++     → sort
+Java    → Arrays.sort
+Python  → list.sort
+
+
+MAX
+C++     → max_element
+Java    → Collections.max
+Python  → max
+
+
+BITS
+C++     → popcount
+Java    → bitCount
+Python  → bin + count
+
+
+PERMUTATION
+C++     → next_permutation
+Java    → no direct standard method
+Python  → itertools.permutations
+
+
+CUSTOM SORT
+C++     → comparator
+Java    → Comparator
+Python  → key=lambda
+```
+
+### One small correction to your notes
+
+Your C++ comment says:
+
+```cpp
+// binary representation of 5
+__builtin_popcount(i)
+```
+
+The function doesn't return the **binary representation**. It returns the **number of set bits (`1`s)** in the binary representation.
+
+So for:
+
+```text
+5 = 101
+```
+
+`__builtin_popcount(5)` returns:
+
+```text
+2
+```
+
+not `101`.
+
+Next, practicing these five algorithms on **one common problem in C++, Java, and Python** would make the syntax differences stick much faster.
