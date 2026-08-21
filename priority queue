@@ -1,0 +1,570 @@
+Yes machi 👍 Let’s do **Priority Queue — C++ vs Java vs Python** in the same differentiation style.
+
+# 🔥 Priority Queue — C++ vs Java vs Python
+
+A normal Queue is:
+
+```text
+10 → 20 → 30 → 40
+↑
+first comes → first goes
+```
+
+A **Priority Queue** is different:
+
+```text
+50
+↑
+highest priority
+```
+
+The element with the highest priority is processed first in a **max-heap**.
+
+---
+
+# 1. Creating Priority Queue
+
+### C++
+
+**Max Heap — default**
+
+```cpp
+priority_queue<int> pq;
+```
+
+**Min Heap**
+
+```cpp
+priority_queue<int, vector<int>, greater<int>> pq;
+```
+
+### Java
+
+**Min Heap — default**
+
+```java
+PriorityQueue<Integer> pq = new PriorityQueue<>();
+```
+
+**Max Heap**
+
+```java
+PriorityQueue<Integer> pq =
+    new PriorityQueue<>(Collections.reverseOrder());
+```
+
+### Python
+
+Python's `heapq` is the standard heap implementation:
+
+**Min Heap**
+
+```python
+import heapq
+
+pq = []
+```
+
+**Max Heap**
+
+Store negative values:
+
+```python
+heapq.heappush(pq, -50)
+```
+
+---
+
+# 2. Add Element
+
+### C++
+
+```cpp
+pq.push(50);
+```
+
+### Java
+
+```java
+pq.add(50);
+```
+
+or:
+
+```java
+pq.offer(50);
+```
+
+### Python `heapq`
+
+```python
+heapq.heappush(pq, 50)
+```
+
+For max heap:
+
+```python
+heapq.heappush(pq, -50)
+```
+
+| C++      | Java                | Python       |
+| -------- | ------------------- | ------------ |
+| `push()` | `add()` / `offer()` | `heappush()` |
+
+---
+
+# 3. Get Highest-Priority Element
+
+### C++
+
+```cpp
+pq.top();
+```
+
+### Java
+
+```java
+pq.peek();
+```
+
+### Python Min Heap
+
+```python
+pq[0]
+```
+
+### Python Max Heap
+
+Because we stored negative values:
+
+```python
+-pq[0]
+```
+
+| C++     | Java     | Python  |
+| ------- | -------- | ------- |
+| `top()` | `peek()` | `pq[0]` |
+
+---
+
+# 4. Remove Highest-Priority Element
+
+### C++
+
+```cpp
+pq.pop();
+```
+
+### Java
+
+```java
+pq.poll();
+```
+
+### Python
+
+```python
+heapq.heappop(pq)
+```
+
+For max heap:
+
+```python
+value = -heapq.heappop(pq)
+```
+
+| C++     | Java     | Python      |
+| ------- | -------- | ----------- |
+| `pop()` | `poll()` | `heappop()` |
+
+---
+
+# 5. Size
+
+### C++
+
+```cpp
+pq.size();
+```
+
+### Java
+
+```java
+pq.size();
+```
+
+### Python
+
+```python
+len(pq)
+```
+
+| C++      | Java     | Python  |
+| -------- | -------- | ------- |
+| `size()` | `size()` | `len()` |
+
+---
+
+# 6. Check Empty
+
+### C++
+
+```cpp
+pq.empty();
+```
+
+### Java
+
+```java
+pq.isEmpty();
+```
+
+### Python
+
+```python
+if not pq:
+```
+
+| C++       | Java        | Python   |
+| --------- | ----------- | -------- |
+| `empty()` | `isEmpty()` | `not pq` |
+
+---
+
+# 🔥 7. Max Heap vs Min Heap
+
+This is the **most important difference**.
+
+| Language   | Max Heap                                      | Min Heap                                         |
+| ---------- | --------------------------------------------- | ------------------------------------------------ |
+| **C++**    | `priority_queue<int>`                         | `priority_queue<int, vector<int>, greater<int>>` |
+| **Java**   | `PriorityQueue<>(Collections.reverseOrder())` | `PriorityQueue<>()`                              |
+| **Python** | `heapq` + negative values                     | `heapq`                                          |
+
+### Example
+
+Elements:
+
+```text
+30 10 50 20 5
+```
+
+### Max Heap
+
+```text
+Top → 50
+```
+
+Remove repeatedly:
+
+```text
+50
+30
+20
+10
+5
+```
+
+### Min Heap
+
+```text
+Top → 5
+```
+
+Remove repeatedly:
+
+```text
+5
+10
+20
+30
+50
+```
+
+---
+
+# 🧠 8. Complete Comparison
+
+| Operation       | C++                                              | Java                              | Python `heapq`  |
+| --------------- | ------------------------------------------------ | --------------------------------- | --------------- |
+| Create Max Heap | `priority_queue<int>`                            | `PriorityQueue<>(reverseOrder())` | negative values |
+| Create Min Heap | `priority_queue<int, vector<int>, greater<int>>` | `PriorityQueue<>()`               | `[]`            |
+| Add             | `push()`                                         | `add()` / `offer()`               | `heappush()`    |
+| Top             | `top()`                                          | `peek()`                          | `pq[0]`         |
+| Remove          | `pop()`                                          | `poll()`                          | `heappop()`     |
+| Size            | `size()`                                         | `size()`                          | `len()`         |
+| Empty           | `empty()`                                        | `isEmpty()`                       | `not pq`        |
+| Priority        | Max by default                                   | Min by default                    | Min by default  |
+
+---
+
+# 🔥 C++ Example
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+
+    priority_queue<int> pq;
+
+    pq.push(30);
+    pq.push(10);
+    pq.push(50);
+    pq.push(20);
+
+    cout << "Top: " << pq.top() << endl;
+
+    pq.pop();
+
+    cout << "Top after pop: " << pq.top() << endl;
+    cout << "Size: " << pq.size() << endl;
+
+    if(pq.empty()) {
+        cout << "Empty" << endl;
+    } else {
+        cout << "Not Empty" << endl;
+    }
+
+    return 0;
+}
+```
+
+Output:
+
+```text
+Top: 50
+Top after pop: 30
+Size: 3
+Not Empty
+```
+
+---
+
+# 🔥 Java Example
+
+```java
+import java.util.*;
+
+class Main {
+    public static void main(String[] args) {
+
+        PriorityQueue<Integer> pq =
+            new PriorityQueue<>(Collections.reverseOrder());
+
+        pq.add(30);
+        pq.add(10);
+        pq.add(50);
+        pq.add(20);
+
+        System.out.println("Top: " + pq.peek());
+
+        pq.poll();
+
+        System.out.println("Top after poll: " + pq.peek());
+        System.out.println("Size: " + pq.size());
+
+        if(pq.isEmpty()) {
+            System.out.println("Empty");
+        } else {
+            System.out.println("Not Empty");
+        }
+    }
+}
+```
+
+Output:
+
+```text
+Top: 50
+Top after poll: 30
+Size: 3
+Not Empty
+```
+
+---
+
+# 🔥 Python Example
+
+For a **min heap**:
+
+```python
+import heapq
+
+pq = []
+
+heapq.heappush(pq, 30)
+heapq.heappush(pq, 10)
+heapq.heappush(pq, 50)
+heapq.heappush(pq, 20)
+
+print("Top:", pq[0])
+
+heapq.heappop(pq)
+
+print("Top after pop:", pq[0])
+print("Size:", len(pq))
+
+if not pq:
+    print("Empty")
+else:
+    print("Not Empty")
+```
+
+Output:
+
+```text
+Top: 10
+Top after pop: 20
+Size: 3
+Not Empty
+```
+
+---
+
+# ⚠️ One Important Python Point
+
+Your notes use:
+
+```python
+import queue
+```
+
+and:
+
+```python
+queue.PriorityQueue()
+```
+
+That works, but for **DSA/heap problems**, you'll very commonly use:
+
+```python
+import heapq
+```
+
+For example:
+
+```python
+pq = []
+
+heapq.heappush(pq, 30)
+heapq.heappush(pq, 10)
+
+print(pq[0])
+```
+
+Output:
+
+```text
+10
+```
+
+So remember:
+
+```text
+Python heapq → Min Heap by default
+```
+
+For Max Heap:
+
+```python
+heapq.heappush(pq, -30)
+heapq.heappush(pq, -50)
+
+print(-pq[0])
+```
+
+Output:
+
+```text
+50
+```
+
+---
+
+# ⏱️ Time Complexity
+
+| Operation  | Priority Queue |
+| ---------- | -------------: |
+| Insert     |       O(log n) |
+| Remove top |       O(log n) |
+| Get top    |           O(1) |
+| Size       |           O(1) |
+
+Why?
+
+When you insert/remove an element, the heap may need to rearrange itself.
+
+```text
+Insert → rearrange → O(log n)
+
+Remove top → rearrange → O(log n)
+
+Get top → already at top → O(1)
+```
+
+---
+
+# 🧠 Remember All Your Containers
+
+You've now covered a really useful set:
+
+```text
+Vector / ArrayList / List
+        ↓
+Dynamic array
+
+LinkedList
+        ↓
+Nodes connected together
+
+Stack
+        ↓
+LIFO
+
+Queue
+        ↓
+FIFO
+
+Deque
+        ↓
+Both ends
+
+Priority Queue
+        ↓
+Highest/lowest priority first
+```
+
+### One-line memory trick 🔥
+
+```text
+Stack          → Last In First Out
+Queue          → First In First Out
+Deque          → Both Ends
+Priority Queue → Priority First
+```
+
+And the **biggest thing to remember across languages**:
+
+```text
+C++       → Max Heap by default
+Java      → Min Heap by default
+Python    → Min Heap by default
+```
+
+That's the one that'll save you from a lot of "why the hell did 5 come out first?" moments 😄 
+
+
+
+
+
+| Operation       | C++                                              | Java                                          | Python          |
+| --------------- | ------------------------------------------------ | --------------------------------------------- | --------------- |
+| Create Max Heap | `priority_queue<int>`                            | `PriorityQueue<>(Collections.reverseOrder())` | Negative values |
+| Create Min Heap | `priority_queue<int, vector<int>, greater<int>>` | `PriorityQueue<>()`                           | `[]` + `heapq`  |
+| Add             | `push()`                                         | `add()` / `offer()`                           | `heappush()`    |
+| Top             | `top()`                                          | `peek()`                                      | `pq[0]`         |
+| Remove          | `pop()`                                          | `poll()`                                      | `heappop()`     |
+| Size            | `size()`                                         | `size()`                                      | `len()`         |
+| Empty           | `empty()`                                        | `isEmpty()`                                   | `not pq`        |
+
