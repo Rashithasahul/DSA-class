@@ -358,8 +358,714 @@ Language
 
 
 
+### For Loop in Map (C++ vs Java vs Python)
+
+The for loop is the most important operation in a Map because it is used to traverse (visit every key-value pair).
+
+### 📌 Syntax Comparison (Easy to Memorize)
+
+|
+Language
+
+|
+
+For Loop Syntax
+
+|
+| --- | --- |
+|
+
+C++
+
+|
+
+`for(auto i : m)`
+
+|
+|
+
+Java
+
+|
+
+`for(Map.Entry<K,V> entry : map.entrySet())`
+
+|
+|
+
+Python
+
+|
+
+`for key, value in m.items():`
+
+|
+
+> 🧠 Memory Trick: C++ → `first, second` • Java → `getKey(), getValue()` • Python → `key, value`
+
+### 1. C++ Map For Loop
+
+C++
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+
+map<int, string> m;
+
+m[101] = "Rahul";
+
+m[102] = "Anu";
+
+m[103] = "Kumar";
+
+for(auto i : m) {
+
+cout << i.first << " " << i.second << endl;
+
+}
+
+}
+
+### Output
+
+101 Rahul
+
+102 Anu
+
+103 Kumar
+
+### Explanation
+
+|
+Code
+
+|
+
+Meaning
+
+|
+| --- | --- |
+|
+
+`auto i`
+
+|
+
+Stores one key-value pair.
+
+|
+|
+
+`i.first`
+
+|
+
+Key
+
+|
+|
+
+`i.second`
+
+|
+
+Value
+
+|
+
+### Visual
+
+![](blob\:https://chatgpt.com/fb712fa0-c373-4d37-8220-b3f628096e4e)
+
+### 2. Java Map For Loop
+
+Java
+
+import java.util.*;
+
+public class Main {
+
+public static void main(String[] args) {
+
+Map<Integer, String> map = new HashMap<>();
+
+map.put(101, "Rahul");
+
+map.put(102, "Anu");
+
+map.put(103, "Kumar");
+
+for (Map.Entry<Integer, String> entry : map.entrySet()) {
+
+System.out.println(entry.getKey() + " " + entry.getValue());
+
+}
+
+}
+
+}
+
+### Output
+
+101 Rahul
+
+102 Anu
+
+103 Kumar
 
 
+### For Loop in Map (C++ vs Java vs Python)
 
+The for loop is the most important operation in a Map because it is used to traverse (visit every key-value pair).
+
+### 📌 Syntax Comparison (Easy to Memorize)
+
+|
+Language
+
+|
+
+For Loop Syntax
+
+|
+| --- | --- |
+|
+
+C++
+
+|
+
+`for(auto i : m)`
+
+|
+|
+
+Java
+
+|
+
+`for(Map.Entry<K,V> entry : map.entrySet())`
+
+|
+|
+
+Python
+
+|
+
+`for key, value in m.items():`
+
+|
+
+> 🧠 Memory Trick: C++ → `first, second` • Java → `getKey(), getValue()` • Python → `key, value`
+
+### 1. C++ Map For Loop
+
+C++
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+
+map<int, string> m;
+
+m[101] = "Rahul";
+
+m[102] = "Anu";
+
+m[103] = "Kumar";
+
+for(auto i : m) {
+
+cout << i.first << " " << i.second << endl;
+
+}
+
+}
+
+### Output
+
+101 Rahul
+
+102 Anu
+
+103 Kumar
+
+### Explanation
+
+|
+Code
+
+|
+
+Meaning
+
+|
+| --- | --- |
+|
+
+`auto i`
+
+|
+
+Stores one key-value pair.
+
+|
+|
+
+`i.first`
+
+|
+
+Key
+
+|
+|
+
+`i.second`
+
+|
+
+Value
+
+|
+
+### Visual
+
+![](blob\:https://chatgpt.com/fb712fa0-c373-4d37-8220-b3f628096e4e)
+
+### 2. Java Map For Loop
+
+Java
+
+import java.util.*;
+
+public class Main {
+
+public static void main(String[] args) {
+
+Map<Integer, String> map = new HashMap<>();
+
+map.put(101, "Rahul");
+
+map.put(102, "Anu");
+
+map.put(103, "Kumar");
+
+for (Map.Entry<Integer, String> entry : map.entrySet()) {
+
+System.out.println(entry.getKey() + " " + entry.getValue());
+
+}
+
+}
+
+}
+
+### Output
+
+101 Rahul
+
+102 Anu
+
+103 Kumar
+
+### Explanation
+
+|
+Code
+
+|
+
+Meaning
+
+|
+| --- | --- |
+|
+
+`Map.Entry`
+
+|
+
+One key-value pair.
+
+|
+|
+
+`entry.getKey()`
+
+|
+
+Key
+
+|
+|
+
+`entry.getValue()`
+
+|
+
+Value
+
+|
+|
+
+`entrySet()`
+
+|
+
+Returns all key-value pairs.
+
+|
+
+### Visual
+
+![](blob\:https://chatgpt.com/db8bd380-5349-49f7-8828-7bcaab135023)
+
+### 3. Python Dictionary For Loop
+
+Python
+
+Run
+
+my_dict = {
+
+101: "Rahul",
+
+102: "Anu",
+
+103: "Kumar"
+
+}
+
+for key, value in my_dict.items():
+
+print(key, value)
+
+### Output
+
+101 Rahul
+
+102 Anu
+
+103 Kumar
+
+### Explanation
+
+|
+Code
+
+|
+
+Meaning
+
+|
+| --- | --- |
+|
+
+`items()`
+
+|
+
+Returns all key-value pairs.
+
+|
+|
+
+`key`
+
+|
+
+Key
+
+|
+|
+
+`value`
+
+|
+
+Value
+
+|
+
+### Visual
+
+![](blob\:https://chatgpt.com/a6f71486-8cce-4a27-a97a-9929ac08b94f)
+
+### 🔥 Side-by-Side Comparison
+
+|
+Operation
+
+|
+
+C++
+
+|
+
+Java
+
+|
+
+Python
+
+|
+| --- | --- | --- | --- |
+|
+
+Traverse map
+
+|
+
+`for(auto i : m)`
+
+|
+
+`for(Map.Entry<K,V> entry : map.entrySet())`
+
+|
+
+`for key, value in dict.items()`
+
+|
+|
+
+Get Key
+
+|
+
+`i.first`
+
+|
+
+`entry.getKey()`
+
+|
+
+`key`
+
+|
+|
+
+Get Value
+
+|
+
+`i.second`
+
+|
+
+`entry.getValue()`
+
+|
+
+`value`
+
+|
+
+### 🎯 Different Types of For Loops
+
+### 1. Print Only Keys
+
+### C++
+
+C++
+
+for(auto i : m){
+
+cout << i.first << endl;
+
+}
+
+### Java
+
+Java
+
+for(Integer key : map.keySet()){
+
+System.out.println(key);
+
+}
+
+### Python
+
+Python
+
+Run
+
+for key in my_dict:
+
+print(key)
+
+### 2. Print Only Values
+
+### C++
+
+C++
+
+for(auto i : m){
+
+cout << i.second << endl;
+
+}
+
+### Java
+
+Java
+
+for(String value : map.values()){
+
+System.out.println(value);
+
+}
+
+### Python
+
+Python
+
+Run
+
+for value in my_dict.values():
+
+print(value)
+
+### 3. Print Both Key and Value (Most Important ⭐)
+
+### C++
+
+C++
+
+for(auto i : m){
+
+cout << i.first << " : " << i.second << endl;
+
+}
+
+### Java
+
+Java
+
+for(Map.Entry<Integer,String> entry : map.entrySet()){
+
+System.out.println(entry.getKey() + " : " + entry.getValue());
+
+}
+
+### Python
+
+Python
+
+Run
+
+for key, value in my_dict.items():
+
+print(key, ":", value)
+
+### 🧠 Easy Memory Tricks (Exam Point of View)
+
+|
+If you want...
+
+|
+
+C++
+
+|
+
+Java
+
+|
+
+Python
+
+|
+| --- | --- | --- | --- |
+|
+
+Only Keys
+
+|
+
+`i.first`
+
+|
+
+`keySet()`
+
+|
+
+`for key in dict`
+
+|
+|
+
+Only Values
+
+|
+
+`i.second`
+
+|
+
+`values()`
+
+|
+
+`values()`
+
+|
+|
+
+Keys + Values
+
+|
+
+`auto i`
+
+|
+
+`Map.Entry`
+
+|
+
+`items()`
+
+|
+
+### 📌 30-Second Cheat Sheet (Must Remember)
+
+C++
+
+for(auto i : m)
+
+Key -> i.first
+
+Value -> i.second
+
+Java
+
+for(Map.Entry<K,V> entry : map.entrySet())
+
+Key -> entry.getKey()
+
+Value -> entry.getValue()
+
+Python
+
+for key, value in dict.items()
+
+Key -> key
+
+Value -> value
+
+> 💡 Interview Tip: The most commonly asked traversal syntax is `auto i : map` (C++), `Map.Entry` (Java), and `items()` (Python).
+
+A good next step is to practice these loops with a small problem, like printing the highest-quantity product from a map.
 
 
