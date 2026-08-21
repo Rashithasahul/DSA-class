@@ -519,4 +519,58 @@ Python OrderedSet:
 
 That's the core difference. Once this clicks, the Set family becomes much less confusing.
 
-**Next good practice:** solve one problem where you use **Priority Queue + Set together**—that'll make the difference between the two stick for real.
+**Next good practice:** solve one problem where you use **Priority Queue + Set together**—that'll make the difference between the two stick for real. 
+
+
+
+from collections import OrderedDict
+
+class OrderedSet:
+    def __init__(self):
+        self._data = OrderedDict()
+
+    def add(self, item):
+        self._data[item] = None
+
+    def remove(self, item):
+        del self._data[item]
+
+    def discard(self, item):
+        self._data.pop(item, None)
+
+    def __contains__(self, item):
+        return item in self._data
+
+    def __iter__(self):
+        return iter(self._data)
+
+    def __repr__(self):
+        return '{' + ', '.join(map(str, self._data)) + '}'
+
+# Create an ordered set and insert elements
+s = OrderedSet()
+s.add(1)  # {1}
+s.add(3)  # {1, 3}
+s.add(5)  # {1, 3, 5}
+s.add(7)  # {1, 3, 5, 7}
+s.add(3)  # {1, 3, 5, 7} --> 3 doesn't get inserted
+
+print(s)
+
+# Erase elements from the ordered set
+s.remove(3)  # Erase element '3'
+s.discard(7)  # Erase element '7' using discard (won't raise an error if the element is not present)
+
+print(s)
+
+for i in [2, 4, 6, 8, 10]:
+    s.add(i)
+
+print(s)
+
+count8 = 1 if 8 in s else 0
+count5 = 1 if 5 in s else 0
+print("Count of 8 in the set:", count8)  # 1
+print("Count of 5 in the set:", count5)  # 0
+
+
