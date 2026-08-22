@@ -1,0 +1,199 @@
+## Euclidean Algorithm — GCD Explanation
+
+---
+
+## What is GCD?
+
+```
+GCD = Greatest Common Divisor
+GCD(12, 8) = 4   ← biggest number that divides BOTH 12 and 8
+GCD(10, 5) = 5
+GCD(7,  3) = 1
+```
+
+---
+
+## The Theorem
+
+```
+GCD(a, b) = GCD(a - b, b)    ← subtraction version
+GCD(a, b) = GCD(a % b, b)    ← modulo version (FASTER)
+```
+
+### Why does this work?
+
+```
+GCD(48, 18)
+= GCD(48 % 18, 18)
+= GCD(12, 18)
+= GCD(12, 18 % 12)
+= GCD(12, 6)
+= GCD(12 % 6, 6)
+= GCD(0, 6)
+= 6  ✅
+```
+
+When one number becomes **0**, the other is the **GCD**!
+
+---
+
+## Code Breakdown — Line by Line
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+```
+Includes all libraries. Standard C++ setup.
+
+---
+
+```cpp
+int a, b;
+cin >> a >> b;
+```
+Takes two numbers as input.
+```
+Input: 48 18
+a = 48, b = 18
+```
+
+---
+
+```cpp
+while(a != 0 && b != 0)
+```
+Keep looping **until one of them becomes 0**.
+```
+Loop runs as long as BOTH a and b are non-zero
+```
+
+---
+
+```cpp
+if(a >= b)
+{
+    a = a % b;    ← replace a with remainder of a÷b
+}
+else
+{
+    b = b % a;    ← replace b with remainder of b÷a
+}
+```
+
+Always divide the **bigger number** by the smaller one:
+```
+a=48, b=18 → a>=b → a = 48%18 = 12
+a=12, b=18 → b>a  → b = 18%12 = 6
+a=12, b=6  → a>=b → a = 12%6  = 0
+Loop stops! (a == 0)
+```
+
+---
+
+```cpp
+if(a == 0)
+{
+    cout << b << endl;   ← b is the GCD
+}
+else
+{
+    cout << a << endl;   ← a is the GCD
+}
+```
+
+Whichever is **NOT zero** is the answer:
+```
+a=0, b=6 → print b → Answer = 6 ✅
+```
+
+---
+
+## Step by Step Trace
+
+### Example: GCD(48, 18)
+
+| Step | a | b | Who is bigger | Operation |
+|---|---|---|---|---|
+| Start | 48 | 18 | a >= b | a = 48%18 = 12 |
+| Step 2 | 12 | 18 | b > a | b = 18%12 = 6 |
+| Step 3 | 12 | 6 | a >= b | a = 12%6 = 0 |
+| Stop | 0 | 6 | a == 0 | Answer = **6** |
+
+---
+
+### Example: GCD(56, 98)
+
+| Step | a | b | Operation |
+|---|---|---|---|
+| Start | 56 | 98 | b = 98%56 = 42 |
+| Step 2 | 56 | 42 | a = 56%42 = 14 |
+| Step 3 | 14 | 42 | b = 42%14 = 0 |
+| Stop | 14 | 0 | Answer = **14** |
+
+---
+
+## Time Complexity
+
+```cpp
+// O(log(min(a,b)))
+```
+
+| Method | Speed | Example GCD(1000000, 1) |
+|---|---|---|
+| Subtraction | O(max(a,b)) | 1,000,000 steps 😱 |
+| Modulo (this code) | O(log min) | ~20 steps ✅ |
+
+Modulo is **much faster** than subtraction!
+
+---
+
+## Visual Understanding
+
+```
+GCD(48, 18)
+
+48 ████████████████████████████████████████████████
+18 ██████████████████
+   ↑ how many times does 18 fit in 48?
+   48 = 2×18 + 12  → remainder 12
+
+GCD(18, 12)
+18 ██████████████████
+12 ████████████
+   18 = 1×12 + 6   → remainder 6
+
+GCD(12, 6)
+12 ████████████
+6  ██████
+   12 = 2×6 + 0    → remainder 0 🎯
+
+ANSWER = 6
+```
+
+---
+
+## One Line Version (Recursive)
+
+```cpp
+int gcd(int a, int b) {
+    return b == 0 ? a : gcd(b, a % b);
+}
+```
+
+Or using built-in:
+```cpp
+cout << __gcd(48, 18);  // prints 6
+```
+
+---
+
+## Summary
+
+```
+1. Take two numbers a and b
+2. Always mod the BIGGER by the SMALLER
+3. Repeat until one becomes 0
+4. The non-zero one is your GCD
+```
+
+> **Key Insight:** GCD doesn't change when you replace the bigger number with its remainder — that's the magic of the Euclidean theorem!
