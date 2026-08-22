@@ -1,0 +1,125 @@
+Math basics Part 2
+Find GCD / HCF of two numbers:
+Find GCD / HCF of two numbers:
+
+
+Euclidean Theorem:
+
+GCD(a,b) = GCD(a-b,b) = GCD(a%b,b) where a
+
+    #include <bits/stdc++.h>
+using namespace std;
+int main() {
+    int a,b;
+    cin>>a>>b;
+    while(a!=0 && b!=0)
+    {
+        if(a>=b)
+        {
+            a=a%b;
+        }
+        else
+        {
+            b=b%a;
+        }
+    }
+    if(a==0)
+    {
+        cout<<b<<endl;
+    }
+    else
+    {
+        cout<<a<<endl;
+    }
+    //O(log(min(a,b)))
+    return 0;
+}
+
+
+
+Explanation:
+int a, b;: Declares two integer variables, "a" and "b," which will store the two numbers for which we want to find the greatest common divisor (GCD).
+The program uses a while loop to repeatedly apply the Euclidean algorithm until one of the numbers (either "a" or "b") becomes zero.
+Within the loop:
+It checks if "a" is greater than or equal to "b."
+If it is, it updates "a" to the remainder of "a" divided by "b" using the modulo operator (%), which effectively sets "a" to the remainder of the division.
+If "a" is not greater than or equal to "b," it means that "b" is greater, so it updates "b" to the remainder of "b" divided by "a."
+The loop continues until one of the numbers becomes zero. When this happens, the other number (which is not zero) is the GCD of the original "a" and "b."
+After the loop, the program checks whether "a" is equal to zero.
+If "a" is equal to zero, it means that "b" is the GCD, so it prints "b."
+If "a" is not equal to zero, it means that "a" is the GCD, so it prints "a."
+The program returns 0 to indicate the successful completion of the program.
+The time complexity of this code is O(log(min(a, b)), where "a" and "b" are the input numbers. The Euclidean algorithm efficiently finds the GCD of two numbers, and the number of iterations required depends on the smaller of the two numbers.
+
+Example:
+Input: 48 18
+
+Iteration 1:
+a is initially 48, and b is 18.
+Since a (48) is greater than b (18), the program updates a to the remainder of a divided by b, which is a = 48 % 18, resulting in a = 12.
+The program continues to the next iteration.
+Iteration 2:
+a is now 12, and b is 18.
+This time, a (12) is not greater than b (18), so the program updates b to the remainder of b divided by a, which is b = 18 % 12, resulting in b = 6.
+The program continues to the next iteration.
+Iteration 3:
+a is 12, and b is now 6.
+Since a (12) is greater than b (6), the program updates a to the remainder of a divided by b, which is a = 12 % 6, resulting in a = 0.
+This time, a has become zero, which means that one of the numbers has become zero.
+After the loop, the program checks whether a is equal to zero. In this case, a is indeed equal to zero, which means that the GCD of the original numbers (48 and 18) is b.
+The program prints b, which is 6, as the GCD of 48 and 18.
+In this example, the program efficiently applies the Euclidean algorithm to find the GCD of the input numbers 48 and 18 by iteratively updating a and b until one of them becomes zero. The GCD is found to be 6, and it's printed as the result.
+
+
+
+JAVA 
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Input two numbers
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+
+        // Find the greatest common divisor using Euclidean algorithm
+        while (a != 0 && b != 0) {
+            if (a >= b) {
+                a = a % b;
+            } else {
+                b = b % a;
+            }
+        }
+
+        // Print the greatest common divisor
+        if (a == 0) {
+            System.out.println(b);
+        } else {
+            System.out.println(a);
+        }
+    }
+}
+
+
+PYTHON 
+
+
+a, b = map(int, input().split())
+
+# Find the greatest common divisor using Euclidean algorithm
+while a != 0 and b != 0:
+    if a >= b:
+        a %= b
+    else:
+        b %= a
+
+# Print the greatest common divisor
+if a == 0:
+    print(b)
+else:
+    print(a)
+
+
+
