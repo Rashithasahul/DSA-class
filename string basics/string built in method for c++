@@ -1,0 +1,109 @@
+Here are comprehensive, structured notes on C++ String Methods, organized for quick revision and easy understanding.
+
+---
+
+### C++ `std::string` Class – Complete Notes
+
+#### 1. What is `std::string`?
+- Part of the **Standard Template Library (STL)** (Header: `<string>`).
+- A dynamic sequence of characters (unlike C-style `char[]` which is fixed).
+- **Dynamic Size:** Grows/shrinks automatically.
+- **Memory Safe:** Handles allocation/deallocation internally.
+- **C-Style Compatible:** Can convert to `const char*` using `.c_str()`.
+
+---
+
+#### 2. Key Constants
+- **`string::npos`**
+    - A static constant (usually the maximum value of `size_t`).
+    - Used as a return value for "not found" (mainly by `.find()`).
+    - *Check:* `if (str.find('z') == string::npos) { /* Not Found */ }`
+
+---
+
+#### 3. Input & Output
+| Method | Description | Syntax / Example |
+| :--- | :--- | :--- |
+| **`getline()`** | Reads a whole line (or until a delimiter) from a stream. | `getline(cin, str);` <br> `getline(cin, str, ',');` // Reads until comma |
+
+---
+
+#### 4. Size & Capacity Methods
+| Method | Description | Syntax / Example |
+| :--- | :--- | :--- |
+| **`length()`** | Returns the number of characters. | `str.length();` // Returns `size_t` |
+| **`empty()`** | Checks if string is empty (length == 0). | `if (str.empty()) { ... }` |
+| **`clear()`** | Removes all characters (length becomes 0). | `str.clear();` |
+
+---
+
+#### 5. Character Access & Search
+| Method | Description | Syntax / Example |
+| :--- | :--- | :--- |
+| **`at(pos)`** | **Safe** access. Throws an exception if index is out of bounds. | `str.at(2);` // Character at index 2 |
+| **`find()`** | Searches for substring/char. Returns position or `npos`. | `str.find("wave");` <br> `str.find('t');` |
+| **`substr(pos, len)`** | Extracts a substring. | `str.substr(3, 4);` // "wave" from "Nxtwave" |
+
+---
+
+#### 6. Modification (Add/Remove/Change)
+| Method | Description | Syntax / Example |
+| :--- | :--- | :--- |
+| **`push_back(ch)`** | Appends **one** character to the end. | `str.push_back('!');` |
+| **`pop_back()`** | Removes **one** character from the end. | `str.pop_back();` |
+| **`append()`** | Adds a string or part of a string to the end. | `str.append("wave");` |
+| **`insert(pos, sub)`** | Inserts a substring at a specific index. | `str.insert(3, "Hello ");` |
+| **`erase(pos, len)`** | Removes a specific portion. | `str.erase(3, 4);` // Removes 4 chars from index 3 |
+| **`replace(pos, len, sub)`** | Replaces a portion with a new string. | `str.replace(3, 4, "XYZ");` |
+
+---
+
+#### 7. Comparison
+| Method | Description | Syntax / Example |
+| :--- | :--- | :--- |
+| **`compare()`** | Lexicographically compares strings. <br> **Returns:** <br> `0` = Equal <br> `< 0` = Less than <br> `> 0` = Greater than | `str1.compare(str2);` <br> `str1.compare(0, 3, str2);` // Compare partial |
+
+---
+
+#### 8. Advanced Parsing – `stringstream`
+- **Header:** `<sstream>`
+- Treats a string like a stream (like `cin`/`cout`).
+- **Best for:** Splitting strings by delimiters and converting data types.
+
+**Example (Splitting by comma):**
+```cpp
+string data = "1,5,9,32";
+stringstream ss(data);
+string token;
+while (getline(ss, token, ',')) {
+    cout << token << endl; // Outputs: 1, 5, 9, 32 (each on new line)
+}
+```
+
+---
+
+### 9. Quick Revision Table (One-Liner Reference)
+
+| Method | What it does |
+| :--- | :--- |
+| `str.length()` | Returns size. |
+| `str.push_back(c)` | Adds char `c` at the end. |
+| `str.pop_back()` | Removes last char. |
+| `str.find(x)` | Finds `x` (char or string). Returns `npos` if absent. |
+| `str.substr(pos, len)` | Cuts a piece of the string. |
+| `str.empty()` | Returns `true` if `str == ""`. |
+| `str.clear()` | Empties the string. |
+| `str.append(s)` | Concatenates `s` at the end. |
+| `str.compare(s)` | Lexicographical comparison (0 if equal). |
+| `str.replace(pos, len, s)` | Overwrites `len` chars from `pos` with `s`. |
+| `str.erase(pos, len)` | Deletes `len` chars from `pos`. |
+| `str.insert(pos, s)` | Inserts `s` before `pos`. |
+| `str.at(pos)` | Safe char access (throws exception). |
+
+---
+
+### Key Takeaways
+1.  **Prefer `at()` over `[]`** when safety is required.
+2.  **Always check `find()` against `string::npos`** before using the result as an index.
+3.  **`stringstream`** is the standard way to parse CSV-like data or tokenize strings.
+4.  All modification methods (like `replace`, `insert`, `erase`) modify the original string (they work in-place).
