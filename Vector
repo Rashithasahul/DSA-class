@@ -1,0 +1,96 @@
+Sure macha 😎 Here’s the Vector difference in C++, Java, and Python.
+
+Feature	C++	Java	Python
+
+Name	vector	ArrayList	list
+Import	<vector>	java.util.ArrayList	No import needed
+Type	Dynamic array	Dynamic array	Dynamic, flexible list
+Syntax	vector<int> v;	ArrayList<Integer> v = new ArrayList<>();	v = []
+Add	v.push_back(10)	v.add(10)	v.append(10)
+Access	v[0]	v.get(0)	v[0]
+Size	v.size()	v.size()	len(v)
+Remove last	v.pop_back()	v.remove(v.size()-1)	v.pop()
+Can store primitives?	Yes	No, uses wrapper (Integer)	Yes, dynamically typed
+Type safety	Strong	Strong	Dynamic typing
+
+
+1. C++ — vector
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    vector<int> v;
+
+    v.push_back(10);
+    v.push_back(20);
+    v.push_back(30);
+
+    cout << v[0] << endl;
+    cout << v.size() << endl;
+}
+
+Output:
+
+10
+3
+
+2. Java — ArrayList
+
+import java.util.*;
+
+class Main {
+    public static void main(String[] args) {
+        ArrayList<Integer> v = new ArrayList<>();
+
+        v.add(10);
+        v.add(20);
+        v.add(30);
+
+        System.out.println(v.get(0));
+        System.out.println(v.size());
+    }
+}
+
+Output:
+
+10
+3
+
+3. Python — list
+
+v = []
+
+v.append(10)
+v.append(20)
+v.append(30)
+
+print(v[0])
+print(len(v))
+
+Output:
+
+10
+3
+
+🔥 Easy way to remember
+
+C++
+
+> vector → push_back() → size()
+
+
+
+Java
+
+> ArrayList → add() → size()
+
+
+
+Python
+
+> list → append() → len()
+
+
+
+One important point: Java doesn't have a built-in Vector equivalent to C++'s vector in the usual modern usage. Java actually has a class literally called Vector, but for most DSA work, ArrayList is the closer comparison to C++ vector and Python list.
