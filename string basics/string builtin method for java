@@ -1,0 +1,93 @@
+Here are your complete, structured notes on **Java Strings, StringBuffer, and StringBuilder**. Since you specifically asked for **StringBuffer notes**, I've included them in detail, along with a crucial comparison between all three.
+
+---
+
+### Part 1: Java `String` Class (Immutable)
+- **Definition:** A sequence of characters. Strings are **objects** in Java.
+- **Immutability:** Once created, a String **cannot be changed**. Any operation (like `replace` or `toUpperCase`) creates a **new String** object.
+- **String Pool:** Java stores literal strings (`"Hello"`) in a special heap area called the *String Pool*. If you create the same literal twice, Java reuses the existing object from the pool to save memory.
+- **Thread-Safety:** Because they are immutable, Strings are automatically safe to use in multi-threaded environments.
+
+#### Common String Methods (Quick Reference)
+
+| Category | Method | Description | Example |
+| :--- | :--- | :--- | :--- |
+| **Inspection** | `length()` | Returns number of characters. | `"Java".length()` → `4` |
+| | `charAt(index)` | Returns character at specific index. | `"Java".charAt(2)` → `'v'` |
+| | `substring(start, end)` | Extracts part of the string (end exclusive). | `"Hello".substring(0,2)` → `"He"` |
+| **Search** | `contains(s)` | Checks if substring exists (returns `boolean`). | `"Hello".contains("ell")` → `true` |
+| | `indexOf(s)` | Returns first index of substring/char, or `-1`. | `"Hello".indexOf('o')` → `4` |
+| | `lastIndexOf(s)` | Returns last index of substring/char. | `"Hello o".lastIndexOf('o')` → `6` |
+| **Comparison** | `equals(s)` | Case-**sensitive** comparison. | `"Hi".equals("hi")` → `false` |
+| | `equalsIgnoreCase(s)` | **Ignores case** (The method you asked about earlier!). | `"Hi".equalsIgnoreCase("HI")` → `true` |
+| | `startsWith(prefix)` | Checks prefix. | `"Java".startsWith("Ja")` → `true` |
+| | `endsWith(suffix)` | Checks suffix. | `"Java".endsWith("va")` → `true` |
+| **Modification**<br>*(Returns new String)* | `replace(old, new)` | Replaces all occurrences of a char. | `"Java".replace('a','b')` → `"Jbvb"` |
+| | `toUpperCase()` | Converts to uppercase. | `"java".toUpperCase()` → `"JAVA"` |
+| | `toLowerCase()` | Converts to lowercase. | `"JAVA".toLowerCase()` → `"java"` |
+| | `trim()` | Removes leading/trailing whitespace. | `"  Hi  ".trim()` → `"Hi"` |
+| | `split(regex)` | Splits into a `String[]` array. | `"a,b,c".split(",")` → `["a","b","c"]` |
+| **Conversion** | `toCharArray()` | Converts String to `char[]`. | `"Hi".toCharArray()` → `['H','i']` |
+
+---
+
+### Part 2: `StringBuffer` (Mutable & Thread-Safe) 
+*(This is what you specifically asked for!)*
+
+- **Definition:** A mutable sequence of characters.
+- **Thread-Safe:** All critical methods are **synchronized**. This means it is safe to use when multiple threads are accessing it simultaneously. 
+- **Performance:** Slower than `StringBuilder` due to the synchronization overhead, but safer for multi-threading.
+
+#### `StringBuffer` Common Methods
+
+| Method | Description | Example |
+| :--- | :--- | :--- |
+| **`append(str)`** | Adds text to the end of the buffer. | `sb.append(" World");` |
+| **`insert(offset, str)`** | Inserts text at a specific position. | `sb.insert(6, "Java ");` |
+| **`reverse()`** | Reverses the character sequence. | `sb.reverse();` // "Java" → "avaJ" |
+| **`delete(start, end)`** | Removes characters from start to end-1. | `sb.delete(5, 10);` |
+| **`toString()`** | Converts the mutable buffer into an immutable `String`. | `String result = sb.toString();` |
+
+**Code Example (Putting it together):**
+```java
+StringBuffer sb = new StringBuffer("Hello");
+sb.append(" World");        // Hello World
+sb.insert(6, "Java ");      // Hello Java World
+sb.delete(5, 10);           // Hello World (removes " Java")
+System.out.println(sb.toString()); 
+```
+
+---
+
+### Part 3: `StringBuilder` (Mutable & NOT Thread-Safe)
+- **Definition:** Identical to `StringBuffer` in syntax and features.
+- **Not Thread-Safe:** Methods are **not synchronized**. 
+- **Performance:** Faster than `StringBuffer` because it has no locking overhead. 
+- **Use Case:** Use this when you are working in a **single-threaded** environment (which is most typical applications).
+
+#### `StringBuilder` Methods
+*(They are exactly the same as StringBuffer, so refer to the table above!)*
+- `append()`, `insert()`, `reverse()`, `delete()`, `toString()`.
+
+---
+
+### 🔥 The "Big Three" Comparison Table (Crucial for Exams/Interviews)
+
+| Feature | `String` | `StringBuffer` | `StringBuilder` |
+| :--- | :--- | :--- | :--- |
+| **Mutability** | **Immutable** (Cannot change) | **Mutable** (Can change) | **Mutable** (Can change) |
+| **Thread-Safe** | Yes (due to immutability) | **Yes** (Synchronized) | **No** (Not synchronized) |
+| **Performance** | Slowest (creates new objects) | Medium (overhead of sync) | **Fastest** (no sync) |
+| **When to use?** | When value doesn't change (e.g., keys, constants). | When shared across multiple threads. | When used inside a single method/thread. |
+| **Memory** | Stored in **String Pool** | Stored in **Heap** | Stored in **Heap** |
+
+---
+
+### 🧠 Key Takeaways for Java Strings
+
+1.  **`equals()` vs `==`:** 
+    - `==` checks if two objects point to the **same memory location**.
+    - `.equals()` checks if the **character sequences are identical**. Always use `.equals()` for comparing string values!
+2.  **The `equalsIgnoreCase()` Method:** This is the Java equivalent you asked about earlier. It compares the *content* while ignoring case.
+3.  **Why use `StringBuffer`?** Only if you have multiple threads modifying the same string object. Otherwise, use `StringBuilder` for better speed.
+4.  **Chaining:** Methods like `append()` return the same object, so you can chain them: `sb.append("A").append("B").reverse();`
