@@ -1,0 +1,139 @@
+The problem describes a repeated exchange process:
+
+- You have two piles: `X` and `Y`.
+- If `X > Y`, swap them so that `X` is the smaller pile.
+- Then, let `oldX = X` and `oldY = Y`.
+  - Remove `oldX` coins from pile `oldY`.
+  - The remaining coins are `oldY - oldX`; put those into pile `X`.
+  - Pile `Y` becomes `oldX`.
+
+So one step is:
+
+```text
+X, Y  ->  Y - X, X    (after ensuring X <= Y)
+```
+
+Repeat this until `X` becomes `0`. The final value of `Y` is the answer.
+
+This is basically the Euclidean algorithm using repeated subtraction, so the final value is actually the GCD of the two original numbers.
+
+Example:
+
+```text
+X = 2, Y = 5
+(2, 5) -> (3, 2) -> swap -> (2, 3) -> (1, 2) -> (1, 1) -> (0, 1)
+```
+
+Final answer: `1`.
+
+So the question asks: given two pile sizes, simulate this exchange and print the number of coins left in pile `Y` when pile `X` becomes empty.
+
+
+You’ve got it exactly right — the process is a direct implementation of the **subtractive Euclidean algorithm**, which is efficiently replaced by the **modulo-based Euclidean algorithm** for GCD.
+
+Your pseudocode is correct, with one minor detail: when the loop ends, `X` holds the GCD, not `Y`. Just make sure the final return value matches.
+
+Here’s a clean implementation of your pseudocode in **Python**, **C++**, and **Java** — all following the exact logic you described.
+
+---
+
+### Python
+```python
+import sys
+
+def find_final_coins(X, Y):
+    while Y != 0:
+        temp = Y
+        Y = X % Y
+        X = temp
+    return X
+
+if __name__ == "__main__":
+    X, Y = map(int, sys.stdin.read().split())
+    print(find_final_coins(X, Y))
+```
+
+---
+
+### C++
+```cpp
+#include <iostream>
+using namespace std;
+
+int findFinalCoins(int X, int Y) { //2,5
+    while (Y != 0) {  // 5!=0 , 2 != 0,  2 != 0
+        int temp = Y; // temp = 5, temp = 2, temp = 2
+        Y = X % Y; // 2 % 5 = 2, 5 % 2 = 1 , y = 2 % 2 = 0
+        X = temp; // x = 5 , x = 2 
+    }
+    return X; 
+}
+
+int main() {
+    int X, Y;
+    cin >> X >> Y;
+    cout << findFinalCoins(X, Y) << endl;
+    return 0;
+}
+```
+
+---
+
+### Java
+```java
+import java.util.Scanner;
+
+public class Main {
+    public static int findFinalCoins(int X, int Y) {
+        while (Y != 0) {
+            int temp = Y;
+            Y = X % Y;
+            X = temp;
+        }
+        return X;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int X = sc.nextInt();
+        int Y = sc.nextInt();
+        System.out.println(findFinalCoins(X, Y));
+        sc.close();
+    }
+}
+```
+
+---
+
+### Why this works
+- Each operation `(X, Y) → (Y, X % Y)` preserves the GCD.
+- When `Y` becomes `0`, the other number is the GCD of the original pair.
+- The process described in the problem (always subtract the smaller from the larger) is the **slow** subtraction version; the modulo version skips multiple subtractions at once, giving **O(log min(X, Y))** time, which handles your constraint `1e9` easily.
+
+
+
+
+
+
+
+4. Why the __gcd function is the solution
+__gcd(X, Y) (or std::gcd in C++17) is a built-in function that runs this exact Euclid algorithm internally.
+
+Since the final leftover in pile Y is always the GCD of the starting numbers, calling __gcd directly returns the correct answer instantly in O(log min(X, Y)) time, easily handling the 10^9 constraint.
+
+
+
+
+
+class solution {
+public:
+    long long findFinalCoins(long long X, long long Y) {
+        return __gcd(X, Y);
+    }
+};
+
+
+
+
+
+
