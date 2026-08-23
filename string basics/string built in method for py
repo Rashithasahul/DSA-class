@@ -1,0 +1,53 @@
+Since you've pasted the **Python String Methods** notes again right after we just finished discussing **Java's String vs StringBuffer/StringBuilder**, I realize you might be preparing for a **comparison test** or need a **super-concise "Exam Ready" Cheat Sheet** for Python specifically.
+
+Let's strip out the fluff and give you the **absolute must-know facts** for Python strings so you can nail any MCQ that pops up next.
+
+---
+
+### 🐍 Python Strings – The "Exam Ready" Cheat Sheet
+
+#### 1. The Golden Rule (Memorize this!)
+> **Python strings are IMMUTABLE.**
+> *This means:* `str.replace()` or `str.upper()` **does NOT change** the original string. It creates a **brand new string**. 
+> *Contrast with Java:* Java `String` is also Immutable. Python does **NOT** have a `StringBuffer` or `StringBuilder` equivalent built into the core language (you'd have to use lists).
+
+---
+
+#### 2. The "Gotcha" Methods (Most MCQ Traps)
+
+| Method | The Trick to Remember | Example |
+| :--- | :--- | :--- |
+| **`len()`** | It's a **FUNCTION** (not a method like Java's `.length()`). You write `len(str)`, not `str.len()`. | `len("Hi")` → `2` |
+| **`find()`** | Returns **`-1`** if not found. (Java returns `-1` too; C++ returns `npos`). | `"Hi".find('z')` → `-1` |
+| **`split()`** | Returns a **LIST** (array) of strings. | `"a,b".split(',')` → `['a','b']` |
+| **`join()`** | The **delimiter comes FIRST!** It's `"-".join(list)`, NOT `list.join("-")`. | `"-".join(["1","2"])` → `"1-2"` |
+| **`replace()`** | Replaces **ALL** occurrences unless you specify a count. | `"aaa".replace('a','b')` → `"bbb"` |
+| **`strip()`** | Removes ONLY leading/trailing spaces. Does NOT remove middle spaces. | `" Hi ".strip()` → `"Hi"` |
+
+---
+
+#### 3. Case Conversion (Quick Reference)
+
+| Method | What it does | Input → Output |
+| :--- | :--- | :--- |
+| `str.upper()` | ALL CAPS | `"Hi"` → `"HI"` |
+| `str.lower()` | all lowercase | `"HI"` → `"hi"` |
+| `str.capitalize()` | **First** letter capital, rest lower | `"hi WORLD"` → `"Hi world"` |
+| `str.title()` | **Every word** capital, rest lower | `"hi WORLD"` → `"Hi World"` |
+
+---
+
+#### 4. The "Mutability" Comparison (Since we just learned Java)
+
+Since you just asked about `StringBuffer` and `StringBuilder` in Java, here is how Python fits in:
+
+| Feature | Java `String` | Python `str` | Java `StringBuilder` |
+| :--- | :--- | :--- | :--- |
+| **Mutable?** | ❌ No | ❌ No | ✅ Yes |
+| **Thread-Safe?** | Yes | Yes | No |
+| **How to efficiently build a string?** | Use `StringBuilder` | Use `" ".join(list)` | Use `.append()` |
+
+**Python Pro Tip:** Because Python strings are immutable, doing `s = s + "x"` inside a loop is **slow** (just like in Java). Instead, use `list.append()` and then `"".join(list)`.
+
+---
+
