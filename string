@@ -1,0 +1,75 @@
+
+
+### 🔹 C++ (your code, mutable)
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string myString = "Hello, World!";
+    cout << myString << endl;       // Hello, World!
+    cout << myString[0] << endl;    // H
+    myString[3] = 'K';              // modify character at index 3
+    cout << myString << endl;       // HelKo, World!
+    return 0;
+}
+```
+
+---
+
+### 🔹 Java (strings are immutable)
+
+```java
+class Main {
+    public static void main(String[] args) {
+        String myString = "Hello, World!";
+        System.out.println(myString);          // Hello, World!
+        System.out.println(myString.charAt(0)); // H
+
+        // To modify a character, convert to char[] or StringBuilder
+        char[] chars = myString.toCharArray();
+        chars[3] = 'K';
+        String modified = new String(chars);
+        System.out.println(modified);          // HelKo, World!
+    }
+}
+```
+
+**Alternative using `StringBuilder`:**
+```java
+StringBuilder sb = new StringBuilder("Hello, World!");
+sb.setCharAt(3, 'K');
+System.out.println(sb.toString());   // HelKo, World!
+```
+
+---
+
+### 🔹 Python (strings are immutable)
+
+```python
+myString = "Hello, World!"
+print(myString)          # Hello, World!
+print(myString[0])       # H
+
+# To modify, convert to list, change, then join
+chars = list(myString)
+chars[3] = 'K'
+myString = ''.join(chars)
+print(myString)          # HelKo, World!
+```
+
+**Alternative using slicing (if only one character):**
+```python
+myString = "Hello, World!"
+myString = myString[:3] + 'K' + myString[4:]
+print(myString)          # HelKo, World!
+```
+BASIC STRING OPERATION 
+
+
+
+
+
+#
