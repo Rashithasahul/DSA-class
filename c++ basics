@@ -1,0 +1,169 @@
+## Notes: Reading a Line and Printing It in C++, Python, and Java
+
+This note covers the simple task of reading a full line of input (including spaces) and printing it back to the standard output. The examples use standard library methods.
+
+---
+
+### 1. C++
+
+**Code:**
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    string s;
+    getline(cin, s);   // Reads entire line until newline
+    cout << s;         // Prints the line (without trailing newline by default)
+    return 0;
+}
+```
+
+**Key Points:**
+- `#include <bits/stdc++.h>` is a non‑standard but widely used header that includes most of the C++ standard library.
+- `getline(cin, s)` reads characters from `cin` until a newline (`\n`) is encountered; the newline is discarded.
+- `cout << s` outputs the string. To add a newline, you can append `<< endl` or `<< '\n'`.
+- The program will read any line, even if it contains spaces.
+
+---
+
+### 2. Python
+
+**Code:**
+```python
+s = input()      # Reads one line from stdin, strips the trailing newline
+print(s)         # Prints the line (adds a newline automatically)
+```
+
+**Key Points:**
+- `input()` reads a line from standard input, removes the trailing newline, and returns it as a string.
+- If the input line is empty (just `Enter`), `s` becomes an empty string.
+- `print(s)` outputs the string and appends a newline by default. To suppress the newline, use `print(s, end='')`.
+- Python’s `input()` raises `EOFError` if no input is available; in competitive programming, this is rarely an issue.
+
+---
+
+### 3. Java
+
+**Code:**
+```java
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();   // Reads the entire line
+        System.out.print(s);        // Prints without an extra newline
+        // or System.out.println(s) to add a newline
+        sc.close();
+    }
+}
+```
+
+WITHOUT IMPORT SCANNER YOU CAN 
+
+class Main {
+    public static void main(String[] args) {
+        // Fully qualified name used here
+        java.util.Scanner sc = new java.util.Scanner(System.in);
+        String line = sc.nextLine();
+        System.out.println(line);
+        sc.close();
+    }
+}
+
+**Key Points:**
+- `Scanner` is the simplest way to read input. `sc.nextLine()` reads the rest of the current line (from the current position to the next newline) and returns it, discarding the newline.
+- `System.out.print(s)` outputs the string without a trailing newline; `System.out.println(s)` adds a newline.
+- Always close the `Scanner` (though not strictly required for simple programs) to free system resources.
+- If you need to read multiple lines, call `nextLine()` repeatedly.
+
+---
+
+### Comparison Table
+
+| Feature               | C++                    | Python                 | Java                   |
+|-----------------------|------------------------|------------------------|------------------------|
+| Include / Import      | `#include <bits/stdc++.h>` | None (built-in)   | `import java.util.Scanner;` |
+| Read line             | `getline(cin, s)`      | `s = input()`          | `sc.nextLine()`        |
+| Print                 | `cout << s;`           | `print(s)`             | `System.out.print(s);` |
+| Newline handling      | Not added by default   | Added by default       | Not added by default   |
+| Handling spaces       | Yes                    | Yes                    | Yes                    |
+
+
+
+ADDING TWO NUMBERS 
+
+Here's the equivalent Java version of the C++ program that reads two integers and prints their sum. I’ll also include the C++ code you already gave for completeness (with a small improvement).
+
+---
+
+## 🔹 C++ Version (your code, works perfectly)
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int a, b;
+    cin >> a >> b;                     // Input: 2 5
+    cout << "Sum: " << a + b << endl;  // Output: Sum: 7
+    return 0;
+}
+```
+
+**Key points:**  
+- `cin` reads two integers separated by whitespace (space, newline).  
+- `cout` prints the concatenated string and the computed sum.  
+- `endl` adds a newline and flushes the output buffer.
+
+---
+
+## 🔸 Java Equivalent (with `import`)
+
+```java
+import java.util.Scanner;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();   // reads first integer
+        int b = sc.nextInt();   // reads second integer
+        System.out.println("Sum: " + (a + b));  // prints the sum
+        sc.close();
+    }
+}
+```
+
+### 🔸 Java Equivalent (without `import` – using fully qualified names)
+
+```java
+class Main {
+    public static void main(String[] args) {
+        java.util.Scanner sc = new java.util.Scanner(System.in);
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        System.out.println("Sum: " + (a + b));
+        sc.close();
+    }
+}
+```
+
+---
+
+## 🧠 Key Differences & Java Details
+
+| Aspect | C++ | Java |
+|--------|-----|------|
+| **Input method** | `cin >> a >> b;` | `sc.nextInt()` for each value |
+| **Reading style** | Can chain multiple reads in one statement | Each read must be a separate call (but can be chained like `int a = sc.nextInt(), b = sc.nextInt();`) |
+| **Output** | `cout << "Sum: " << a + b << endl;` | `System.out.println("Sum: " + (a + b));` |
+| **Concatenation** | `<<` operator; `a + b` is computed first because it's a direct arithmetic expression | `+` operator; **parentheses** around `(a + b)` are necessary, otherwise it concatenates strings: `"Sum: " + a + b` gives `"Sum: 25"` instead of `"Sum: 7"` |
+| **Imports** | `#include <bits/stdc++.h>` (non‑standard but common) | Must import `java.util.Scanner` or use fully qualified name |
+| **Class definition** | Free-standing `main()` | `main()` is inside a `class` |
+
+---
+
+////
+
+
