@@ -1,0 +1,155 @@
+
+### C++
+
+**Code:**
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int arr[5];   // declares an array of 5 integers on the stack
+    return 0;
+}
+```
+
+---
+
+### Java
+
+**Code:**
+```java
+class Main {
+    public static void main(String[] args) {
+        int[] arr = new int[5];   // declares and creates an array object
+    }
+}
+```
+
+
+
+**Dynamic alternative:** `java.util.ArrayList<Integer> list = new ArrayList<>();`
+
+---
+
+### Python
+
+**Code:**
+```python
+arr = [0] * 5   # creates a list of 5 zeros
+# or
+arr = [0 for _ in range(5)]   # list comprehension
+```
+
+
+---
+
+### Quick Comparison Table
+
+| Aspect | C++ (stack array) | Java (array object) | Python (list) |
+|--------|-------------------|---------------------|---------------|
+| **Declaration** | `int arr[5];` | `int[] arr = new int[5];` | `arr = [0]*5` |
+| **Storage** | Stack | Heap | Heap |
+| **Default values** | Garbage (uninitialised) | `0` (for `int`) | Must be specified |
+| **Size** | Fixed at compile‑time | Fixed at creation (`arr.length`) | Dynamic (can grow) |
+| **Bounds check** | None (undefined behaviour) | Yes (`ArrayIndexOutOfBoundsException`) | Yes (`IndexError`) |
+| **Type** | Homogeneous primitive | Homogeneous primitive/objects | Heterogeneous (any type) |
+| **Memory management** | Automatic (scope) | Garbage collected | Garbage collected |
+
+---
+
+
+---
+### Complete Example with Initialisation and Access
+
+**C++**
+```cpp
+int arr[5] = {1,2,3,4,5};   // initialised
+arr[0] = 10;
+cout << arr[4];             // prints 5
+```
+
+**Java**
+```java
+int[] arr = {1,2,3,4,5};    // shorthand initialisation
+arr[0] = 10;
+System.out.println(arr[4]); // prints 5
+```
+
+**Python**
+```python
+arr = [1,2,3,4,5]
+arr[0] = 10
+print(arr[4])               # prints 5
+```
+
+MULTI DIMESNSIONAL ARRAY
+
+
+
+
+---
+
+### ✅ Corrected Code
+
+```java
+class Main {
+    public static void main(String[] args) {
+        int[][] arr = {{1,2}, {3,4}};   // ✅ correct
+        System.out.println(arr[0][1]);  // Output: 2
+    }
+}
+```
+
+**Alternative syntax (less common):**
+```java
+int arr[][] = {{1,2}, {3,4}};
+```
+
+---
+
+### 📌 Key Points
+
+| Aspect | Explanation |
+|--------|-------------|
+| **Declaration** | `int[][] arr` (type `int` followed by `[]` for each dimension). |
+| **Initialisation** | `{{1,2},{3,4}}` – a 2‑row, 2‑column array. |
+| **Size** | Inferred from the initialiser (so `[2][2]` is redundant and illegal). |
+| **Output** | `arr[0][1]` is the second element of the first row → `2`. |
+
+---
+
+### 🆚 Comparison with C++
+
+In C++, you could write:
+```cpp
+int arr[2][2] = {{1,2},{3,4}};
+```
+Here the size is given in the declaration. But Java **does not** allow that when you use an initialiser.
+
+---
+
+### 📝 If you want to allocate separately (without initialiser)
+
+```java
+int[][] arr = new int[2][2];   // all elements default to 0
+arr[0][0] = 1;
+arr[0][1] = 2;
+arr[1][0] = 3;
+arr[1][1] = 4;
+```
+
+---
+
+**Final corrected program:**
+
+```java
+class Main {
+    public static void main(String[] args) {
+        int[][] arr = {{1,2}, {3,4}};
+        System.out.println(arr[0][1]);   // prints 2
+    }
+}
+``
+
+
+This note gives you a clear, language‑neutral understanding of how basic array/list creation differs across C++, Java, and Python. Use it as a quick reference when switching between these languages.
