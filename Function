@@ -1,0 +1,155 @@
+Here's the equivalent code for a **function that adds two numbers** in **C++** (your original code), **Java**, and **Python**, along with a side-by-side comparison.
+
+---
+
+### 🔹 C++ (your code)
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int sum(int a, int b){
+    int c;
+    c = a + b;
+    return c;
+}
+
+int main() {
+    int a, b;
+    cin >> a >> b; // Input - 5 10
+    cout << "Sum: " << sum(a, b); // Output - Sum: 15
+    return 0;
+}
+```
+
+---
+
+### 🔹 Java
+
+```java
+import java.util.Scanner;
+
+class Main {
+    // Method to add two numbers
+    static int sum(int a, int b) {
+        int c = a + b;
+        return c;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        System.out.println("Sum: " + sum(a, b));
+        sc.close();
+    }
+}
+```
+
+**Without import (fully qualified):**
+```java
+class Main {
+    static int sum(int a, int b) {
+        int c = a + b;
+        return c;
+    }
+
+    public static void main(String[] args) {
+        java.util.Scanner sc = new java.util.Scanner(System.in);
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        System.out.println("Sum: " + sum(a, b));
+        sc.close();
+    }
+}
+```
+
+---
+
+### 🔹 Python
+
+```python
+def sum_numbers(a, b):
+    c = a + b
+    return c
+
+# Read input
+a, b = map(int, input().split())  # Input: 5 10
+print("Sum:", sum_numbers(a, b))
+```
+
+**Alternative (simpler):**
+```python
+a, b = map(int, input().split())
+print("Sum:", a + b)  # no function needed
+```
+
+**Note:** Python has a built-in `sum()` function, so avoid naming your function `sum` to prevent conflicts. I used `sum_numbers` instead.
+
+---
+
+### 📊 Side-by-Side Comparison
+
+| Aspect | C++ | Java | Python |
+|--------|-----|------|--------|
+| **Function/Method** | `int sum(int a, int b)` | `static int sum(int a, int b)` | `def sum_numbers(a, b):` |
+| **Return type** | Must specify (`int`) | Must specify (`int`) | Implicit (no type needed) |
+| **Variable scope** | Block-scoped | Block-scoped | Indentation-based |
+| **Read input** | `cin >> a >> b;` | `sc.nextInt();` (twice) | `map(int, input().split())` |
+| **Print** | `cout << "Sum: " << sum(a,b);` | `System.out.println("Sum: " + sum(a,b));` | `print("Sum:", sum_numbers(a,b))` |
+| **Class/Namespace** | Not required | Required (class) | Not required |
+
+---
+
+### 🔍 Key Differences
+
+1. **Java requires `static`** for the method because `main()` is static, and we call it directly.
+2. **Python doesn't have types** – no need to specify `int` for parameters or return.
+3. **C++ can chain `cin >> a >> b`** – Java needs two separate calls.
+4. **Python `input().split()`** returns strings, so we use `map(int, ...)` to convert.
+
+---
+
+### 💡 Shorter Versions
+
+**C++ (concise):**
+```cpp
+#include <iostream>
+using namespace std;
+int sum(int a, int b) { return a + b; }
+int main() { int a,b; cin>>a>>b; cout<<"Sum: "<<sum(a,b); }
+```
+
+**Java (concise):**
+```java
+import java.util.Scanner;
+class Main {
+    static int sum(int a, int b) { return a + b; }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Sum: " + sum(sc.nextInt(), sc.nextInt()));
+    }
+}
+```
+
+**Python (concise):**
+```python
+a, b = map(int, input().split())
+print("Sum:", a + b)
+```
+
+---
+
+### ⚠️ Note for Python
+
+Avoid naming your function `sum` because it will **shadow** Python's built-in `sum()` function:
+
+```python
+# ❌ Bad practice
+def sum(a, b):   # shadows built-in sum()
+    return a + b
+
+# ✅ Good practice
+def add(a, b):
+    return a + b
+```
