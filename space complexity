@@ -1,0 +1,339 @@
+# Space Complexity - Complete Notes
+
+## 📌 What is Space Complexity?
+
+> **Space Complexity** = The amount of computer memory an algorithm needs to complete a task
+
+### 🎯 Two Key Concepts
+
+| Concept | Definition | Example |
+|---------|------------|---------|
+| **Time** | How fast algorithm runs | 3N + 2 steps |
+| **Space** | How much memory algorithm uses | Variables, arrays, function calls |
+
+---
+
+## 📐 The Master Formula
+
+> **Total Space = Input Space + Auxiliary Space**
+
+```
+Space Complexity = Input Space + Auxiliary Space
+```
+
+| Component | Description | Examples |
+|-----------|-------------|----------|
+| **Input Space** | Memory for input data | Array, string, parameters |
+| **Auxiliary Space** | Extra memory used by algorithm | Variables, temporary storage, recursion stack |
+
+---
+
+## 🔍 Example 1: Addition Function (O(1))
+
+### Unoptimized Version
+```cpp
+int addition(int a, int b) {
+    int c = a + b;    // Extra variable created
+    return c;
+}
+```
+
+### Step-by-Step Space Breakdown:
+
+| Component | Memory Used | Type |
+|-----------|-------------|------|
+| Parameter `a` | 4 bytes | Input Space |
+| Parameter `b` | 4 bytes | Input Space |
+| Variable `c` | 4 bytes | Auxiliary Space |
+| Function call overhead | Small | Auxiliary Space |
+| **Total** | **~12 bytes + overhead** | **O(1)** |
+
+**Formula**: `O(2 + 1 + c) = O(1)` (constant)
+
+---
+
+### Optimized Version
+```cpp
+int addition(int a, int b) {
+    return a + b;     // No extra variable
+}
+```
+
+| Component | Memory Used | Type |
+|-----------|-------------|------|
+| Parameter `a` | 4 bytes | Input Space |
+| Parameter `b` | 4 bytes | Input Space |
+| Function call overhead | Small | Auxiliary Space |
+| **Total** | **~8 bytes + overhead** | **O(1)** |
+
+**Formula**: `O(2 + c) = O(1)`
+
+---
+
+## 🔍 Example 2: Sum of Array (O(N))
+
+```cpp
+int add_array(int arr[], int n) {
+    int sum = 0;
+    for(int i = 0; i < n; i++) {
+        sum = sum + arr[i];
+    }
+    return sum;
+}
+```
+
+### Step-by-Step Space Breakdown:
+
+| Component | Memory | Type | Explanation |
+|-----------|--------|------|-------------|
+| Array `arr` | **N × 4 bytes** | **Input Space** | N elements × 4 bytes each |
+| Parameter `n` | 4 bytes | Input Space | Size of array |
+| Variable `sum` | 4 bytes | Auxiliary Space | Stores running total |
+| Variable `i` | 4 bytes | Auxiliary Space | Loop counter |
+| Function overhead | Small | Auxiliary Space | Function call stack |
+| **Total** | **4N + 12 + c** | - | - |
+
+**Formula**: 
+```
+Space = N (array) + 3 (n, sum, i) + c (overhead)
+Space = O(N + 3 + c)
+Space = O(N)  // Remove constants
+```
+
+---
+
+## 📊 Visual Representation: Input vs Auxiliary Space
+
+### Addition Function (O(1))
+```
+Input Space:  [a] [b]    ← 2 parameters
+Auxiliary:    [c]        ← Extra variable (or none)
+Total:        O(1)       ← Constant!
+```
+
+### Sum Array Function (O(N))
+```
+Input Space:  [1][2][3][4][5]...  ← N elements
+              ↑ Array (N elements)
+              
+Auxiliary:    [sum] [i] [n]      ← 3 variables (constant)
+              
+Total:        N + 3 → O(N)       ← Linear growth!
+```
+
+---
+
+## 📈 Space Complexity Table
+
+| Algorithm | Input Space | Auxiliary Space | Total | Big-O |
+|-----------|-------------|-----------------|-------|-------|
+| Addition (optimized) | O(2) | O(1) | O(3) | **O(1)** |
+| Addition (unoptimized) | O(2) | O(2) | O(4) | **O(1)** |
+| Sum of Array | O(N) | O(3) | O(N+3) | **O(N)** |
+| 2D Matrix Sum | O(N²) | O(3) | O(N²+3) | **O(N²)** |
+| Recursive Factorial | O(1) | O(N) | O(N) | **O(N)** |
+
+---
+
+## 🎯 Step-by-Step Analysis Method
+
+### Step 1: Identify Input Space
+- Parameters passed to function
+- Arrays, strings, structures
+- Size depends on input
+
+### Step 2: Identify Auxiliary Space
+- Local variables declared inside function
+- Temporary variables
+- Recursive call stack
+
+### Step 3: Add Both
+```
+Total Space = Input Space + Auxiliary Space
+```
+
+### Step 4: Apply Big-O Rules
+- Remove constants
+- Keep only dominant term
+
+---
+
+## 🔄 Example 3: 2D Array Sum (O(N²))
+
+```cpp
+int sum_2d(int matrix[][N], int n) {
+    int total = 0;
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            total += matrix[i][j];
+        }
+    }
+    return total;
+}
+```
+
+### Space Breakdown:
+
+| Component | Memory | Type |
+|-----------|--------|------|
+| Matrix `matrix` | **N × N × 4 bytes** | **Input Space** |
+| Parameter `n` | 4 bytes | Input Space |
+| Variable `total` | 4 bytes | Auxiliary Space |
+| Variables `i, j` | 8 bytes (2×4) | Auxiliary Space |
+| Function overhead | Small | Auxiliary Space |
+
+**Formula**: `O(N² + 3 + c) = O(N²)`
+
+---
+
+## 🔄 Example 4: Recursive Function (O(N))
+
+### Factorial with Recursion
+```cpp
+int factorial(int n) {
+    if(n == 0) return 1;
+    return n * factorial(n - 1);
+}
+```
+
+### Space Breakdown:
+
+| Component | Memory | Type |
+|-----------|--------|------|
+| Parameter `n` | 4 bytes × N calls | Input Space (via recursion) |
+| Recursion Stack | N × (function frame) | Auxiliary Space |
+| **Total** | **O(N)** | - |
+
+**Why O(N)?** Each recursive call adds to the call stack!
+
+```
+factorial(5)
+  → factorial(4)
+    → factorial(3)
+      → factorial(2)
+        → factorial(1)
+          → factorial(0)  ← 6 stack frames = O(N)
+```
+
+---
+
+## 📊 Quick Reference: Space Complexity Patterns
+
+| Pattern | Input Space | Auxiliary Space | Total | Example |
+|---------|-------------|-----------------|-------|---------|
+| **O(1)** | Constant | Constant | Constant | Addition, Swap |
+| **O(N)** | N elements | Constant | O(N) | Array sum |
+| **O(N)** | Constant | N stack frames | O(N) | Recursion |
+| **O(N²)** | N×N elements | Constant | O(N²) | Matrix operations |
+| **O(N+M)** | Two arrays | Constant | O(N+M) | Merge two arrays |
+
+---
+
+## 🎯 Common Space Complexity Examples
+
+### Example 5: O(1) Space - No Extra Memory
+```cpp
+int findMax(int arr[], int n) {
+    int max = arr[0];        // 1 variable
+    for(int i = 1; i < n; i++) {
+        if(arr[i] > max) max = arr[i];
+    }
+    return max;
+}
+```
+**Space**: `O(1)` - Only `max` and `i` (constant)
+
+---
+
+### Example 6: O(N) Space - Creating New Array
+```cpp
+int* reverseArray(int arr[], int n) {
+    int* reversed = new int[n];    // New array - O(N)
+    for(int i = 0; i < n; i++) {
+        reversed[i] = arr[n-1-i];
+    }
+    return reversed;
+}
+```
+**Space**: 
+- Input: `arr` (O(N))
+- Auxiliary: `reversed` (O(N))
+- **Total: O(N)**
+
+---
+
+### Example 7: O(N²) Space - 2D Matrix
+```cpp
+int** createMatrix(int n) {
+    int** matrix = new int*[n];     // N rows
+    for(int i = 0; i < n; i++) {
+        matrix[i] = new int[n];     // N columns each
+    }
+    return matrix;
+}
+```
+**Space**: `N × N = O(N²)`
+
+---
+
+## ✅ Summary Formula Table
+
+| Function | Input Space | Auxiliary Space | Total Space | Big-O |
+|----------|-------------|-----------------|-------------|-------|
+| Addition | O(2) | O(1) | O(3) | **O(1)** |
+| Array Sum | O(N) | O(3) | O(N+3) | **O(N)** |
+| Matrix Sum | O(N²) | O(3) | O(N²+3) | **O(N²)** |
+| Factorial (recursive) | O(1) | O(N) | O(N) | **O(N)** |
+| Reverse Array (new) | O(N) | O(N) | O(2N) | **O(N)** |
+| 2D Matrix Creation | O(1) | O(N²) | O(N²) | **O(N²)** |
+
+---
+
+## 🔑 Golden Rules for Space Complexity
+
+1. **Input Space** = Memory for input data
+2. **Auxiliary Space** = Extra memory algorithm uses
+3. **Total = Input + Auxiliary**
+4. **Remove constants** in Big-O
+5. **Keep dominant term** only
+6. **Recursion** adds stack space = O(depth)
+
+---
+
+## 🎓 Practice Problems
+
+### Q1: What's the space complexity?
+```cpp
+void duplicateArray(int arr[], int n) {
+    int copy[100];    // Fixed size
+    for(int i = 0; i < n; i++) {
+        copy[i] = arr[i];
+    }
+}
+```
+**Answer**: O(1) - Array size is fixed (100), not dependent on N
+
+---
+
+### Q2: What's the space complexity?
+```cpp
+void duplicateArray(int arr[], int n) {
+    int* copy = new int[n];    // Dynamic size
+    for(int i = 0; i < n; i++) {
+        copy[i] = arr[i];
+    }
+}
+```
+**Answer**: O(N) - New array of size N created
+
+---
+
+## 📌 Final Cheat Sheet
+
+| Complexity | Meaning | Memory Usage |
+|------------|---------|--------------|
+| **O(1)** | Constant | Fixed memory, independent of input |
+| **O(N)** | Linear | Memory grows linearly with input |
+| **O(N²)** | Quadratic | Memory grows as square of input |
+| **O(log N)** | Logarithmic | Memory grows logarithmically |
+| **O(N log N)** | N log N | Memory grows as N × log N |
