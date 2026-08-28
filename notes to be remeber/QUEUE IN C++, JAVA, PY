@@ -1,0 +1,183 @@
+| **Feature**        | **C++**                       | **Java**                                                    | **Python**                      |
+| ------------------ | ----------------------------- | ----------------------------------------------------------- | ------------------------------- |
+| **Import**         | `#include <queue>`            | `import java.util.Queue;`<br>`import java.util.LinkedList;` | `from collections import deque` |
+| **Declaration**    | `queue<int> q;`               | `Queue<Integer> q = new LinkedList<>();`                    | `q = deque()`                   |
+| **Add (Back)**     | `q.push(x);`                  | `q.add(x);` / `q.offer(x);`                                 | `q.append(x)`                   |
+| **Remove (Front)** | `q.pop();`                    | `q.remove();` / `q.poll();`                                 | `q.popleft()`                   |
+| **View Front**     | `q.front();`                  | `q.peek();` / `q.element();`                                | `q[0]`                          |
+| **View Back**      | `q.back();`                   | ❌ No direct method                                          | `q[-1]`                         |
+| **Check Empty**    | `q.empty();`                  | `q.isEmpty();`                                              | `if not q:`                     |
+| **Size**           | `q.size();`                   | `q.size();`                                                 | `len(q)`                        |
+| **Clear**          | `while (!q.empty()) q.pop();` | `q.clear();`                                                | `q.clear()`                     |
+| **Swap**           | `q.swap(q2);`                 | ❌ No direct method                                          | ❌ No direct method              |
+| **Search**         | ❌ No direct method            | `q.contains(x);`                                            | `x in q`                        |
+
+JAVA 
+NO BUILT IN SWAP 
+
+import java.util.Queue;
+import java.util.LinkedList;
+
+public class Main {
+    public static void main(String[] args) {
+        Queue<Integer> q1 = new LinkedList<>();
+        Queue<Integer> q2 = new LinkedList<>();
+        
+        q1.add(10);
+        q1.add(20);
+        q1.add(30);
+        
+        q2.add(99);
+        q2.add(88);
+        
+        System.out.println("Before swap:");
+        System.out.println("q1 front: " + q1.peek());  // 10
+        System.out.println("q2 front: " + q2.peek());  // 99
+        
+        // ✅ MANUAL SWAP USING TEMP
+        Queue<Integer> temp = new LinkedList<>();
+        temp.addAll(q1);
+        q1.clear();
+        q1.addAll(q2);
+        q2.clear();
+        q2.addAll(temp);
+        
+        System.out.println("After swap:");
+        System.out.println("q1 front: " + q1.peek());  // 99
+        System.out.println("q2 front: " + q2.peek());  // 10
+    }
+}
+
+Java - Swap Using Constructor
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Queue<Integer> q1 = new LinkedList<>(Arrays.asList(10, 20, 30));
+        Queue<Integer> q2 = new LinkedList<>(Arrays.asList(99, 88, 77));
+        
+        System.out.println("Before: q1=" + q1 + ", q2=" + q2);
+        
+        // Swap using constructor
+        Queue<Integer> temp = new LinkedList<>(q1);
+        q1.clear();
+        q1.addAll(q2);
+        q2.clear();
+        q2.addAll(temp);
+        
+        System.out.println("After: q1=" + q1 + ", q2=" + q2);
+    }
+}
+PYTHON - SWAP
+NO BUILT IN SWAP 
+
+from collections import deque
+
+q1 = deque([10, 20, 30])
+q2 = deque([99, 88, 77])
+
+print("Before swap:")
+print("q1:", list(q1))  # [10, 20, 30]
+print("q2:", list(q2))  # [99, 88, 77]
+
+# ✅ MANUAL SWAP USING TEMP
+temp = q1.copy()
+q1.clear()
+q1.extend(q2)
+q2.clear()
+q2.extend(temp)
+
+print("After swap:")
+print("q1:", list(q1))  # [99, 88, 77]
+print("q2:", list(q2))  # [10, 20, 30]
+
+Python - Swap Using List (Alternative)
+
+q1 = [10, 20, 30]
+q2 = [99, 88, 77]
+
+# ✅ Pythonic swap
+q1, q2 = q2, q1
+
+print("q1:", q1)  # [99, 88, 77]
+print("q2:", q2)  # [10, 20, 30]
+
+JAVA IN BACK 
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Queue<Integer> q = new LinkedList<>();
+        q.add(10);
+        q.add(20);
+        q.add(30);
+        
+        // ❌ NO back() method in Java Queue
+        // q.back();  // ERROR!
+        
+        // ✅ METHOD 1: Convert to array
+        Integer[] arr = q.toArray(new Integer[0]);
+        System.out.println("Back element: " + arr[arr.length - 1]);  // 30
+        
+        // ✅ METHOD 2: Use ArrayList
+        ArrayList<Integer> list = new ArrayList<>(q);
+        System.out.println("Back element: " + list.get(list.size() - 1));  // 30
+        
+        // ✅ METHOD 3: Use Deque instead
+        Deque<Integer> dq = new ArrayDeque<>();
+        dq.addLast(10);
+        dq.addLast(20);
+        dq.addLast(30);
+        System.out.println("Back element: " + dq.getLast());  // 30
+    }
+}
+
+C++ SEARCH IN QUEUE 
+#include <bits/stdc++.h>
+using namespace std;
+
+// ✅ Custom search function
+bool searchQueue(queue<int> q, int target) {
+    while (!q.empty()) {
+        if (q.front() == target) {
+            return true;
+        }
+        q.pop();
+    }
+    return false;
+}
+
+// ✅ Get position from front
+int searchQueuePosition(queue<int> q, int target) {
+    int pos = 1;
+    while (!q.empty()) {
+        if (q.front() == target) {
+            return pos;
+        }
+        q.pop();
+        pos++;
+    }
+    return -1;
+}
+
+int main() {
+    queue<int> q;
+    q.push(10);
+    q.push(20);
+    q.push(30);
+    q.push(40);
+    q.push(50);
+    
+    // Search
+    cout << "Contains 30: " << searchQueue(q, 30) << endl;       // 1 (true)
+    cout << "Contains 99: " << searchQueue(q, 99) << endl;       // 0 (false)
+    
+    // Position from front
+    cout << "Position of 30: " << searchQueuePosition(q, 30) << endl;  // 3
+    cout << "Position of 50: " << searchQueuePosition(q, 50) << endl;  // 5
+    cout << "Position of 99: " << searchQueuePosition(q, 99) << endl;  // -1
+    
+    return 0;
+}
+
