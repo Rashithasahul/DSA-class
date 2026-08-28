@@ -1,0 +1,51 @@
+| **Feature**         | **C++**                              | **Java**                                      | **Python**                      |
+| ------------------- | ------------------------------------ | --------------------------------------------- | ------------------------------- |
+| **Import**          | `#include <list>`                    | `import java.util.LinkedList;`                | `from collections import deque` |
+| **Declaration**     | `list<int> l;`                       | `LinkedList<Integer> l = new LinkedList<>();` | `l = deque()`                   |
+| **Add Front**       | `push_front(x)` / `emplace_front(x)` | `addFirst(x)`                                 | `appendleft(x)`                 |
+| **Add Back**        | `push_back(x)` / `emplace_back(x)`   | `addLast(x)`                                  | `append(x)`                     |
+| **Remove Front**    | `pop_front()`                        | `removeFirst()`                               | `popleft()`                     |
+| **Remove Back**     | `pop_back()`                         | `removeLast()`                                | `pop()`                         |
+| **View Front**      | `front()`                            | `getFirst()`                                  | `l[0]`                          |
+| **View Back**       | `back()`                             | `getLast()`                                   | `l[-1]`                         |
+| **Access by Index** | ❌ O(n)                               | ❌ O(n)                                        | ❌ O(n)                          |
+| **Insert Middle**   | ✅ O(1) *(with iterator)*             | ✅ O(1) *(with iterator)*                      | ❌ O(n)                          |
+| **Size**            | `size()`                             | `size()`                                      | `len(l)`                        |
+| **Empty Check**     | `empty()`                            | `isEmpty()`                                   | `if not l:`                     |
+| **Clear**           | `clear()`                            | `clear()`                                     | `clear()`                       |
+| **Remove Element**  | `remove(x)`                          | `removeFirstOccurrence(x)`                    | `remove(x)`                     |
+
+
+INSERT MIDDEL 
+
+C++
+  auto it = l.begin();
+    advance(it, 2);       // Move to index 2
+    l.insert(it, 100);    // Insert 100 at index 2
+
+JAVA 
+
+ListIterator<Integer> it = l.listIterator();
+        while (it.hasNext()) {
+            if (it.next() == 30) {
+                it.add(99); // Insert 99 before 30
+                break;
+            }
+        }
+
+PYTHON 
+
+# 3. Insert at specific index (O(n))
+l.insert(2, 200)    # Insert 200 at index 2 
+
+
+ACCES BY INDEX IN C++, JAVA , PY 
+
+C++ list = NO index access (use vector instead)
+
+Java LinkedList = Index access but SLOW (use ArrayList)
+
+Python deque = Index access and FAST! ✅
+
+
+JAVA 
