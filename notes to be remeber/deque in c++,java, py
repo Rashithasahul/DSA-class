@@ -1,0 +1,20 @@
+| Feature                   | **C++**            | **Java**                                                    | **Python**                      |
+| ------------------------- | ------------------ | ----------------------------------------------------------- | ------------------------------- |
+| **Import**                | `#include <deque>` | `import java.util.Deque;`<br>`import java.util.ArrayDeque;` | `from collections import deque` |
+| **Declaration**           | `deque<int> dq;`   | `Deque<Integer> dq = new ArrayDeque<>();`                   | `dq = deque()`                  |
+| **Add Front**             | `push_front(x)`    | `addFirst(x)`                                               | `appendleft(x)`                 |
+| **Add Back**              | `push_back(x)`     | `addLast(x)`                                                | `append(x)`                     |
+| **Add Front (efficient)** | `emplace_front(x)` | `addFirst(x)`                                               | `appendleft(x)`                 |
+| **Add Back (efficient)**  | `emplace_back(x)`  | `addLast(x)`                                                | `append(x)`                     |
+| **Remove Front**          | `pop_front()`      | `removeFirst()`                                             | `popleft()`                     |
+| **Remove Back**           | `pop_back()`       | `removeLast()`                                              | `pop()`                         |
+| **View Front**            | `front()`          | `getFirst()`                                                | `dq[0]`                         |
+| **View Back**             | `back()`           | `getLast()`                                                 | `dq[-1]`                        |
+| **Access by Index**       | `dq[i]` — **O(1)** | `dq.get(i)` — **O(n)** ⚠️                                   | `dq[i]` — **O(n)** ⚠️           |
+| **Size**                  | `size()`           | `size()`                                                    | `len(dq)`                       |
+| **Empty Check**           | `empty()`          | `isEmpty()`                                                 | `if not dq:`                    |
+| **Clear**                 | `clear()`          | `clear()`                                                   | `clear()`                       |
+
+
+
+  
