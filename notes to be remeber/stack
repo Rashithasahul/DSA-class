@@ -1,0 +1,136 @@
+| **Feature**     | **C++**                           | **Java**                              | **Python**                      |
+| --------------- | --------------------------------- | ------------------------------------- | ------------------------------- |
+| **Import**      | `#include <stack>`                | `import java.util.Stack;`             | `from collections import deque` |
+| **Declaration** | `stack<int> stk;`                 | `Stack<Integer> stk = new Stack<>();` | `stk = deque()`                 |
+| **Push**        | `stk.push(x)`                     | `stk.push(x)`                         | `stk.append(x)`                 |
+| **Emplace**     | `stk.emplace(x)`                  | ❌ Not available                       | ❌ Not available                 |
+| **Pop**         | `stk.pop()`                       | `stk.pop()`                           | `stk.pop()`                     |
+| **Top / Peek**  | `stk.top()`                       | `stk.peek()`                          | `stk[-1]`                       |
+| **Check Empty** | `stk.empty()`                     | `stk.isEmpty()`                       | `if not stk:`                   |
+| **Size**        | `stk.size()`                      | `stk.size()`                          | `len(stk)`                      |
+| **Search**      | ❌ Not available                   | `stk.search(x)`                       | `x in stk`                      |
+| **Swap**        | `stk.swap(stk2)`                  | ❌ Not available                       | ❌ Not available                 |
+| **Clear**       | `while (!stk.empty()) stk.pop();` | `stk.clear()`                         | `stk.clear()`                   |
+
+
+SWAP IN C++ ,JAVA , PY 
+
+C++ 
+
+// Stack
+stk1.swap(stk2);
+
+// Vector
+v1.swap(v2);
+
+// List
+l1.swap(l2);
+
+// Deque
+dq1.swap(dq2);
+
+// Queue
+q1.swap(q2);
+
+// Priority Queue
+pq1.swap(pq2);
+
+JAVA
+
+import java.util.Stack;
+
+public class Main {
+    public static void main(String[] args) {
+        Stack<Integer> stk1 = new Stack<>();
+        Stack<Integer> stk2 = new Stack<>();
+        
+        stk1.push(10);
+        stk1.push(20);
+        stk1.push(30);
+        
+        stk2.push(99);
+        stk2.push(88);
+        
+        System.out.println("Before swap:");
+        System.out.println("stk1 top: " + stk1.peek());  // 30
+        System.out.println("stk2 top: " + stk2.peek());  // 88
+        
+        // ❌ NO BUILT-IN SWAP - Use temp
+        Stack<Integer> temp = new Stack<>();
+        temp.addAll(stk1);
+        stk1.clear();
+        stk1.addAll(stk2);
+        stk2.clear();
+        stk2.addAll(temp);
+        
+        System.out.println("After swap:");
+        System.out.println("stk1 top: " + stk1.peek());  // 88
+        System.out.println("stk2 top: " + stk2.peek());  // 30
+    }
+}
+
+
+PYTHON 
+
+from collections import deque
+
+stk1 = deque([10, 20, 30])
+stk2 = deque([99, 88])
+
+print("Before swap:")
+print("stk1 top:", stk1[-1])  # 30
+print("stk2 top:", stk2[-1])  # 88
+
+# ❌ NO BUILT-IN SWAP - Use temp
+temp = stk1.copy()
+stk1.clear()
+stk1.extend(stk2)
+stk2.clear()
+stk2.extend(temp)
+
+print("After swap:")
+print("stk1 top:", stk1[-1])  # 88
+print("stk2 top:", stk2[-1])  # 30
+
+
+SEARCH IN C++ , PY , JAVA 
+
+C++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+// Custom search function
+int searchStack(stack<int> s, int target) {
+    int pos = 1;
+    while (!s.empty()) {
+        if (s.top() == target) {
+            return pos;
+        }
+        s.pop();
+        pos++;
+    }
+    return -1; // Not found
+}
+
+int main() {
+    stack<int> stk;
+    stk.push(10);
+    stk.push(20);
+    stk.push(30);
+    stk.push(40);
+    stk.push(50);
+    
+    cout << "Position of 30: " << searchStack(stk, 30) << endl;  // 3
+    cout << "Position of 50: " << searchStack(stk, 50) << endl;  // 1
+    cout << "Position of 99: " << searchStack(stk, 99) << endl;  // -1
+    
+    return 0;
+}
+
+
+JAVA 
+
+
+
+
