@@ -1,0 +1,12 @@
+| **Feature**         | **C++ `unordered_set`**    | **Java `HashSet`**                       | **Python `set`**                 |
+| ------------------- | -------------------------- | ---------------------------------------- | -------------------------------- |
+| **Import**          | `#include <unordered_set>` | `import java.util.*;`                    | Built-in                         |
+| **Declaration**     | `unordered_set<int> us;`   | `HashSet<Integer> hs = new HashSet<>();` | `s = set()`                      |
+| **Add**             | `us.insert(10);`           | `hs.add(10);`                            | `s.add(10)`                      |
+| **Remove**          | `us.erase(10);`            | `hs.remove(10);`                         | `s.remove(10)` / `s.discard(10)` |
+| **Find**            | `us.find(10) != us.end()`  | `hs.contains(10)`                        | `10 in s`                        |
+| **Count**           | `us.count(10)`             | Not available                            | Not available                    |
+| **Size**            | `us.size()`                | `hs.size()`                              | `len(s)`                         |
+| **Empty**           | `us.empty()`               | `hs.isEmpty()`                           | `not s`                          |
+| **Clear**           | `us.clear()`               | `hs.clear()`                             | `s.clear()`                      |
+| **Time Complexity** | O(1) average               | O(1) average                             | O(1) average                     |
