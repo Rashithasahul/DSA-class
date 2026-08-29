@@ -1,0 +1,9 @@
+| **Operation**  | **C++**                                          | **Java**                                             | **Python**               |
+| -------------- | ------------------------------------------------ | ---------------------------------------------------- | ------------------------ |
+| **Create**     | `priority_queue<int, vector<int>, greater<int>>` | `PriorityQueue<Integer> pq = new PriorityQueue<>();` | `pq = []`                |
+| **Add**        | `pq.push(30);`                                   | `pq.offer(30);`                                      | `heapq.heappush(pq, 30)` |
+| **Top / Peek** | `pq.top()`                                       | `pq.peek()`                                          | `pq[0]`                  |
+| **Remove**     | `pq.pop()`                                       | `pq.poll()`                                          | `heapq.heappop(pq)`      |
+| **Size**       | `pq.size()`                                      | `pq.size()`                                          | `len(pq)`                |
+| **Empty**      | `pq.empty()`                                     | `pq.isEmpty()`                                       | `not pq`                 |
+| **Swap**       | `pq.swap(pq2)`                                   | Manual (`addAll` + `clear`)                          | `pq, pq2 = pq2, pq`      |
