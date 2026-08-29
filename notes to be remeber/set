@@ -1,0 +1,15 @@
+| **Feature**         | **C++ `set`**           | **Java `TreeSet`**                      | **Python `set`**                 |
+| ------------------- | ----------------------- | --------------------------------------- | -------------------------------- |
+| **Import**          | `#include <set>`        | `import java.util.*;`                   | Built-in                         |
+| **Declaration**     | `set<int> s;`           | `TreeSet<Integer> s = new TreeSet<>();` | `s = set()`                      |
+| **Add**             | `s.insert(10);`         | `s.add(10);`                            | `s.add(10)`                      |
+| **Remove**          | `s.erase(10);`          | `s.remove(10);`                         | `s.remove(10)` / `s.discard(10)` |
+| **Find**            | `s.find(10) != s.end()` | `s.contains(10)`                        | `10 in s`                        |
+| **Count**           | `s.count(10)`           | Not available                           | Not available                    |
+| **Size**            | `s.size()`              | `s.size()`                              | `len(s)`                         |
+| **Empty**           | `s.empty()`             | `s.isEmpty()`                           | `not s`                          |
+| **Clear**           | `s.clear()`             | `s.clear()`                             | `s.clear()`                      |
+| **First**           | `*s.begin()`            | `s.first()`                             | `min(s)`                         |
+| **Last**            | `*s.rbegin()`           | `s.last()`                              | `max(s)`                         |
+| **Iteration**       | Sorted order            | Sorted order                            | Unordered                        |
+| **Time Complexity** | O(log n)                | O(log n)                                | O(1) average                     |
