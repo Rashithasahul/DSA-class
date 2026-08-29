@@ -1,0 +1,10 @@
+| **Feature**     | **C++ `multiset`**        | **Java**                                           | **Python `Counter`**              |
+| --------------- | ------------------------- | -------------------------------------------------- | --------------------------------- |
+| **Import**      | `#include <set>`          | `import java.util.*;`                              | `from collections import Counter` |
+| **Declaration** | `multiset<int> ms;`       | `TreeMap<Integer, Integer> map = new TreeMap<>();` | `ms = Counter()`                  |
+| **Add**         | `ms.insert(10);`          | `map.put(10, map.getOrDefault(10, 0) + 1);`        | `ms[10] += 1`                     |
+| **Remove ALL**  | `ms.erase(10);`           | `map.remove(10);`                                  | `del ms[10]`                      |
+| **Remove ONE**  | `ms.erase(ms.find(10));`  | Decrease count by `1`                              | `ms[10] -= 1`                     |
+| **Count**       | `ms.count(10)`            | `map.getOrDefault(10, 0)`                          | `ms[10]`                          |
+| **Size**        | `ms.size()`               | `sum(map.values())`                                | `sum(ms.values())`                |
+| **Find**        | `ms.find(10) != ms.end()` | `map.containsKey(10)`                              | `10 in ms`                        |
