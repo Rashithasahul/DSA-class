@@ -1,0 +1,17 @@
+| Feature               | C++ `unordered_map`            | Java `HashMap`                                 | Python `dict`     |
+| --------------------- | ------------------------------ | ---------------------------------------------- | ----------------- |
+| **Key → Value**       | ✅                              | ✅                                              | ✅                 |
+| **Duplicate keys**    | ❌                              | ❌                                              | ❌                 |
+| **Order**             | ❌ No guaranteed order          | ❌ No guaranteed order                          | ✅ Insertion order |
+| **Sorted?**           | ❌                              | ❌                                              | ❌                 |
+| **Declaration**       | `unordered_map<int,string> m;` | `HashMap<Integer,String> m = new HashMap<>();` | `m = {}`          |
+| **Add / Update**      | `m[k] = v`                     | `m.put(k,v)`                                   | `m[k] = v`        |
+| **Insert only**       | `m.insert({k,v})`              | `m.putIfAbsent(k,v)`                           | `if k not in m`   |
+| **Get value**         | `m[k]`                         | `m.get(k)`                                     | `m[k]`            |
+| **Check key**         | `m.find(k) != m.end()`         | `m.containsKey(k)`                             | `k in m`          |
+| **Remove**            | `m.erase(k)`                   | `m.remove(k)`                                  | `del m[k]`        |
+| **Size**              | `m.size()`                     | `m.size()`                                     | `len(m)`          |
+| **Empty**             | `m.empty()`                    | `m.isEmpty()`                                  | `len(m) == 0`     |
+| **Clear**             | `m.clear()`                    | `m.clear()`                                    | `m.clear()`       |
+| **Typical lookup**    | O(1) average                   | O(1) average                                   | O(1) average      |
+| **Worst case lookup** | O(n)                           | O(n)                                           | O(n)              |
