@@ -1,0 +1,11 @@
+| Feature            | C++ `multimap`             | Java `Map<K,List<V>>`                                       | Python `defaultdict(list)`                             |
+| ------------------ | -------------------------- | ----------------------------------------------------------- | ------------------------------------------------------ |
+| **Basic idea**     | Key → multiple values      | Key → List of values                                        | Key → List of values                                   |
+| **Duplicate keys** | ✅ Allowed                  | ❌ Map keys unique, but multiple values stored in List       | ❌ Dict keys unique, but multiple values stored in List |
+| **Sorted keys**    | ✅ Yes                      | ❌ `HashMap` not sorted                                      | ❌ Insertion order                                      |
+| **Declaration**    | `multimap<int,string> mm;` | `Map<Integer,List<String>> mm = new HashMap<>();`           | `defaultdict(list) mm = defaultdict(list)`             |
+| **Add value**      | `mm.insert({key,value})`   | `mm.computeIfAbsent(key,k -> new ArrayList<>()).add(value)` | `mm[key].append(value)`                                |
+| **Access values**  | `equal_range(key)`         | `mm.get(key)`                                               | `mm[key]`                                              |
+| **Check key**      | `mm.find(key)`             | `mm.containsKey(key)`                                       | `key in mm`                                            |
+| **Remove**         | `mm.erase(key)`            | `mm.remove(key)`                                            | `del mm[key]`                                          |
+| **Size**           | `mm.size()`                | `mm.size()`                                                 | `len(mm)`                                              |
