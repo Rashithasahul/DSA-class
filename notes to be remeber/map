@@ -1,0 +1,19 @@
+| Feature             | C++ `map`              | Java `Map`                                 | Python `dict`           |
+| ------------------- | ---------------------- | ------------------------------------------ | ----------------------- |
+| **Basic structure** | Key → Value            | Key → Value                                | Key → Value             |
+| **Declaration**     | `map<int,string> m;`   | `Map<Integer,String> m = new HashMap<>();` | `m = {}`                |
+| **Keys**            | Unique                 | Unique                                     | Unique                  |
+| **Duplicate key**   | ❌ Not allowed          | ❌ Not allowed                              | ❌ Not allowed           |
+| **Default order**   | **Sorted by key**      | `HashMap` → no guaranteed sorting          | **Insertion order**     |
+| **Sorted map**      | `map`                  | `TreeMap`                                  | `dict` + `sorted()`     |
+| **Insert / Update** | `m[k] = v`             | `m.put(k,v)`                               | `m[k] = v`              |
+| **Insert only**     | `m.insert({k,v})`      | `m.putIfAbsent(k,v)`                       | `if k not in m: m[k]=v` |
+| **Emplace**         | `m.emplace(k,v)`       | No direct equivalent                       | No direct equivalent    |
+| **Access value**    | `m[k]`                 | `m.get(k)`                                 | `m[k]`                  |
+| **Safe access**     | `m.find(k)`            | `m.get(k)`                                 | `m.get(k)`              |
+| **Check key**       | `m.find(k) != m.end()` | `m.containsKey(k)`                         | `k in m`                |
+| **Remove**          | `m.erase(k)`           | `m.remove(k)`                              | `del m[k]` / `m.pop(k)` |
+| **Size**            | `m.size()`             | `m.size()`                                 | `len(m)`                |
+| **Empty**           | `m.empty()`            | `m.isEmpty()`                              | `len(m) == 0`           |
+| **Clear**           | `m.clear()`            | `m.clear()`                                | `m.clear()`             |
+| **Loop**            | `for(auto i:m)`        | `for(Map.Entry<K,V> e:m.entrySet())`       | `for k,v in m.items()`  |
